@@ -1,4 +1,4 @@
-package Shop;
+package Shop.models;
 
 public class Product {
 
