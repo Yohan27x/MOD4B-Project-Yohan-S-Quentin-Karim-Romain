@@ -1,6 +1,7 @@
-import utility.swing.LayoutHelper;
-
+package Shop.views;
 import javax.swing.*;
+import Shop.utility.LayoutHelper;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;

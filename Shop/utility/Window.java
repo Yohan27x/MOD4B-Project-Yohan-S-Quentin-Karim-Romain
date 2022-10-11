@@ -1,4 +1,4 @@
-package Milestone2.utility;
+package Shop.utility;
 
 import javax.swing.*;
 import java.awt.*;
