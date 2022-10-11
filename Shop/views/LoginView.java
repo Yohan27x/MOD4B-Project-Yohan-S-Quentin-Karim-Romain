@@ -22,8 +22,10 @@ public class LoginView extends JPanel
         passwordTextField = new JPasswordField();
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createLargeEmptyBorder());
+
         add(createTitle(appName));
         add(LayoutHelper.createRigidArea());
         add(createUserPanel());
