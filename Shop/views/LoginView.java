@@ -4,7 +4,6 @@ import Shop.utility.LayoutHelper;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 public class LoginView extends JPanel 
 {
@@ -17,13 +16,15 @@ public class LoginView extends JPanel
 
     public LoginView()
     {
-        appName = new JLabel("Application Name");
+        appName = new JLabel("Da Shop");
         loginTextField = new JTextField();
         passwordTextField = new JPasswordField();
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createLargeEmptyBorder());
+
         add(createTitle(appName));
         add(LayoutHelper.createRigidArea());
         add(createUserPanel());
@@ -61,5 +62,29 @@ public class LoginView extends JPanel
         panel.add(registerButton);
         panel.add(LayoutHelper.createXLargeRigidArea());
         return panel;
+    }
+
+    public void addLoginListener(ActionListener listener)
+    {
+        loginButton.addActionListener(listener);
+    }
+
+    public void removeLoginListener(ActionListener listener)
+    {
+        loginButton.removeActionListener(listener);
+    }
+
+    public void addRegisterListener(ActionListener listener)
+    {
+        registerButton.addActionListener(listener);
+    }
+
+    public void removeRegisterListener(ActionListener listener)
+    {
+        registerButton.removeActionListener(listener);
+    }
+
+    public Window getWindow(){
+        return this.getWindow();
     }
 }

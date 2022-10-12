@@ -22,4 +22,6 @@ public class Window extends JFrame
         setMinimumSize(getSize());
         setResizable(resizable);
     }
+
+
 }

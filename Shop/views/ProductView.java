@@ -1,5 +1,6 @@
 package Shop.views;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -148,6 +149,5 @@ public class ProductView extends JPanel {
 
         return panel;
     }
-
 
 }
