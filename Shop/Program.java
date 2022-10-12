@@ -2,10 +2,12 @@ package Shop;
 import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
-import Shop.controllers.LoginController;
+
+import Shop.controllers.ProductController;
+import Shop.models.ListOfProducts;
 import Shop.utility.Window;
 import Shop.views.LoginView;
-import Shop.views.RegisterView;
+import Shop.views.ProductView;
 
 
 public class Program {
@@ -17,11 +19,21 @@ public class Program {
     private static void start()
     {
         useSystemLookAndFeel();
-        LoginView Lview = new LoginView();
-        LoginController controller = new LoginController(Lview);
-        Window window = new Window("APPLICATION", Lview);
-        window.setVisible(true);
-        
+
+
+        LoginView loginView = new LoginView();
+        Window windowLoginView  = new Window("APPLICATION", loginView);
+
+        ListOfProducts listOfProducts = new ListOfProducts();
+        ProductView productview = new ProductView();
+
+        ProductController controller = new ProductController(productview, listOfProducts);
+
+        Window windowProduct = new Window("APPLICATION", productview);
+
+        windowProduct.setVisible(true);
+
+
     }
 
     private static void useSystemLookAndFeel()
