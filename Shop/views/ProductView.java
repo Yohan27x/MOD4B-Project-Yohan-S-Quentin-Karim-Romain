@@ -1,4 +1,4 @@
-package Shop;
+package Shop.views;
 
 public class ProductView {
 }
