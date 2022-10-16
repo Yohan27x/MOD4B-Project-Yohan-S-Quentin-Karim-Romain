@@ -6,13 +6,17 @@ import java.awt.*;
 public class Product {
 
     private String name;
-    private String ImagePath;
     private double price; // canadian dollar
-    private int SKU;
-    private String category;
     private int quantity;
+    private String category;
     private String description;
 
+    private String ImagePath;
+    private int SKU;
+
+    private boolean inStock;
+
+    private int soldedQuantity;
 
     public Product(String name, int price, String path){
         this.name = name;

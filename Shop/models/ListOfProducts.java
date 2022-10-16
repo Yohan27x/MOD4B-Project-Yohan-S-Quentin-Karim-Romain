@@ -21,7 +21,6 @@ public class ListOfProducts {
         AllAvailableProducts.add(product4);
         AllAvailableProducts.add(product5);
 
-
     }
 
 

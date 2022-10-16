@@ -10,7 +10,9 @@ import Shop.models.ListOfProducts;
 import Shop.utility.Window;
 import Shop.views.LoginView;
 import Shop.views.ProductView;
-import Shop.views.RegisterView;;
+
+import Shop.views.RegisterView;
+
 
 
 public class Program {
@@ -27,18 +29,21 @@ public class Program {
         LoginView loginView = new LoginView();
         Window windowLoginView  = new Window("APPLICATION", loginView);
 
-        ListOfProducts listOfProducts = new ListOfProducts();
-        ProductView productview = new ProductView();
-
         RegisterView registerView = new RegisterView();
-        Window windowRegisterView = new Window("APPLICATION", registerView);
+        Window windowRegisterView  = new Window("APPLICATION", registerView);
 
-        ProductController controller = new ProductController(productview, listOfProducts);
+        ListOfProducts listOfProducts = new ListOfProducts();
+        ProductView productView = new ProductView();
 
-        Window windowProduct = new Window("APPLICATION", productview);
-        windowRegisterView.setVisible(true);
-        windowLoginView.setVisible(true);
+        ProductController controller = new ProductController(productView, listOfProducts);
+        Window windowProduct = new Window("APPLICATION", productView);
+
+        //windowLoginView.setVisible(true);
+        //windowRegisterView.setVisible(true);
+
+       
         windowProduct.setVisible(true);
+
 
 
     }

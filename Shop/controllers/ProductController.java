@@ -20,10 +20,18 @@ public class ProductController {
 
         //view.initialize(listOfProducts);
         //listOfProducts.addlisteners;
+        view.addNextPageListener(this::OnNextPageClicked);
+        view.addPreviousPageListener(this::OnPreviousPageClicked);
 
     }
 
-    private void OnNextPageClicked(){
+    private void OnNextPageClicked(ActionEvent event){
+        view.increasePageNumber();
+
+    }
+
+    private void OnPreviousPageClicked(ActionEvent event){
+        view.decreasePageNumber();
 
     }
 
