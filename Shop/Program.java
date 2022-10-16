@@ -1,4 +1,6 @@
 package Shop;
+import java.util.zip.ZipEntry;
+
 import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
@@ -8,7 +10,9 @@ import Shop.models.ListOfProducts;
 import Shop.utility.Window;
 import Shop.views.LoginView;
 import Shop.views.ProductView;
+
 import Shop.views.RegisterView;
+
 
 
 public class Program {
@@ -36,6 +40,8 @@ public class Program {
 
         //windowLoginView.setVisible(true);
         //windowRegisterView.setVisible(true);
+
+       
         windowProduct.setVisible(true);
 
 
