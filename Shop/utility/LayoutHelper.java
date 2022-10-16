@@ -7,7 +7,7 @@ import java.awt.*;
 public class LayoutHelper
 {
     public static final int SmallSize = 10;
-    public static final int DefaultSize = 20;
+    public static final int DefaultSize = 10;
     public static final int LargeSize = 40;
     public static final int XLargeSize = 60;
     private static final Dimension SmallDimension = new Dimension(SmallSize, SmallSize);
