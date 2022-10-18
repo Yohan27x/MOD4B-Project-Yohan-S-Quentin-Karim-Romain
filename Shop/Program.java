@@ -1,10 +1,13 @@
 package Shop;
+import java.sql.*;
 import java.util.zip.ZipEntry;
 
 import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
-
+import Shop.controllers.LoginController;
+import Shop.controllers.ProductController;
+import Shop.controllers.RegisterController;
 import Shop.controllers.AccountBalanceController;
 import Shop.controllers.MainController;
 import Shop.controllers.ProductController;
@@ -32,40 +35,22 @@ public class Program {
         NavigationService.displayLogInPage(window);
         window.setVisible(true);
 
-        /*
-
-
-        LoginView loginView = new LoginView();
-        Window windowLoginView  = new Window("APPLICATION", loginView);
+       
+        LoginController controller = new LoginController(loginView);
+        //ListOfProducts listOfProducts = new ListOfProducts();
+        //ProductView productview = new ProductView();
 
         RegisterView registerView = new RegisterView();
-        Window windowRegisterView  = new Window("APPLICATION", registerView);
+        RegisterController registerController = new RegisterController(registerView);
+        Window windowRegisterView = new Window("APPLICATION", registerView);
 
-        Account account = new Account();
-        MainView mainView = new MainView();
-        MainController mainController = new MainController(account,mainView);
-        Window windowMainView  = new Window("APPLICATION", mainView);
+        //ProductController controller = new ProductController(productview, listOfProducts);
 
-        AccountBalanceView accountBalanceView = new AccountBalanceView();
-        Window windowAccountBalanceView = new Window("APPLICATION", accountBalanceView);
-        AccountBalanceController accountBalanceController = new AccountBalanceController(account, accountBalanceView);
-
-
-        ListOfProducts listOfProducts = new ListOfProducts();
-        ProductView productView = new ProductView();
-        ProductController controller = new ProductController(productView, listOfProducts);
-        Window windowProduct = new Window("APPLICATION", productView);
-
-        //windowLoginView.setVisible(true);
+        //Window windowProduct = new Window("APPLICATION", productview);
+        windowLoginView.setVisible(true);
         //windowRegisterView.setVisible(true);
-
-
-        windowProduct.setVisible(true);
-        windowAccountBalanceView.setVisible(true);
-        windowMainView.setVisible(true);
-
-         */
-
+        //initializeDatabseHandeler();
+        
 
 
     }
@@ -81,4 +66,6 @@ public class Program {
             e.printStackTrace();
         }
     }
+
+    
 }

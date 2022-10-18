@@ -75,6 +75,17 @@ public class LoginView extends JPanel
     }
 
 
+    public String getLoginText()
+    {
+        return loginTextField.getText();
+    }
+
+    public char[] getPasswordText()
+    {
+        return passwordTextField.getPassword();
+    }
+
+
 
     public void addLoginListener(ActionListener listener)
     {
@@ -94,17 +105,6 @@ public class LoginView extends JPanel
     public void removeRegisterListener(ActionListener listener)
     {
         registerButton.removeActionListener(listener);
-    }
-
-    public JButton getDefaultButton()
-    {
-        return loginButton;
-    }
-
-
-    public void focusUsername()
-    {
-        loginTextField.requestFocusInWindow();
     }
 
 
