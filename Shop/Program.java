@@ -1,11 +1,13 @@
 package Shop;
+import java.sql.*;
 import java.util.zip.ZipEntry;
 
 import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
-
+import Shop.controllers.LoginController;
 import Shop.controllers.ProductController;
+import Shop.controllers.RegisterController;
 import Shop.models.ListOfProducts;
 import Shop.utility.Window;
 import Shop.views.LoginView;
@@ -26,20 +28,21 @@ public class Program {
 
         LoginView loginView = new LoginView();
         Window windowLoginView  = new Window("APPLICATION", loginView);
-
-        ListOfProducts listOfProducts = new ListOfProducts();
-        ProductView productview = new ProductView();
+        LoginController controller = new LoginController(loginView);
+        //ListOfProducts listOfProducts = new ListOfProducts();
+        //ProductView productview = new ProductView();
 
         RegisterView registerView = new RegisterView();
+        RegisterController registerController = new RegisterController(registerView);
         Window windowRegisterView = new Window("APPLICATION", registerView);
 
-        ProductController controller = new ProductController(productview, listOfProducts);
+        //ProductController controller = new ProductController(productview, listOfProducts);
 
-        Window windowProduct = new Window("APPLICATION", productview);
-        windowRegisterView.setVisible(true);
+        //Window windowProduct = new Window("APPLICATION", productview);
         windowLoginView.setVisible(true);
-        windowProduct.setVisible(true);
-
+        //windowRegisterView.setVisible(true);
+        //initializeDatabseHandeler();
+        
 
     }
 
@@ -54,4 +57,6 @@ public class Program {
             e.printStackTrace();
         }
     }
+
+    
 }
