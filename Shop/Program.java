@@ -8,11 +8,17 @@ import javax.swing.*;
 import Shop.controllers.LoginController;
 import Shop.controllers.ProductController;
 import Shop.controllers.RegisterController;
+import Shop.controllers.AccountBalanceController;
+import Shop.controllers.MainController;
+import Shop.controllers.ProductController;
+import Shop.models.Account;
 import Shop.models.ListOfProducts;
 import Shop.utility.Window;
 import Shop.views.LoginView;
 import Shop.views.ProductView;
-import Shop.views.RegisterView;;
+
+import Shop.views.RegisterView;
+
 
 
 public class Program {
@@ -25,9 +31,11 @@ public class Program {
     {
         useSystemLookAndFeel();
 
+        Window window = new Window("LoginPage", true);
+        NavigationService.displayLogInPage(window);
+        window.setVisible(true);
 
-        LoginView loginView = new LoginView();
-        Window windowLoginView  = new Window("APPLICATION", loginView);
+       
         LoginController controller = new LoginController(loginView);
         //ListOfProducts listOfProducts = new ListOfProducts();
         //ProductView productview = new ProductView();
@@ -43,6 +51,7 @@ public class Program {
         //windowRegisterView.setVisible(true);
         //initializeDatabseHandeler();
         
+
 
     }
 

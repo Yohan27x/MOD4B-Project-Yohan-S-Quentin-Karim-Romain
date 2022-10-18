@@ -6,19 +6,27 @@ import java.awt.*;
 public class Product {
 
     private String name;
-    private String ImagePath;
     private double price; // canadian dollar
-    private int SKU;
-    private String category;
     private int quantity;
+    private String category;
     private String description;
+    private String ImagePath;
+    private int SKU;
 
+    private boolean inStock;
 
-    public Product(String name, int price, String path){
+    private int soldedQuantity;
+
+    public Product(String name, int price, String path, String category){
         this.name = name;
         this.price = price;
+        this.quantity = 10;
+        this.category = category;
+        this.description = "A very simple product!";
+
+
         ImagePath = path;
-        //ImagePath = "Shop/Images/JuiceBottle.png";
+
 
     }
     public String getName(){

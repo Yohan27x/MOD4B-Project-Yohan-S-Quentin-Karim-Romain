@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class RegisterView extends JPanel{
+
     private JLabel appName;
     private JTextField userTextField;
     private JTextField adresTextField;
@@ -15,11 +16,13 @@ public class RegisterView extends JPanel{
     private JButton backButton;
     private JButton registerButton;
 
+
     public RegisterView(){
-        appName = new JLabel("Application Name");
+        appName = new JLabel("Register Page");
         userTextField = new JTextField();
         adresTextField = new JTextField();
         mailAdressField = new JTextField();
+        passwordField = new JPasswordField();
         accountBalanceField = new JTextField();
         passwordTextField = new JPasswordField();
         passwordTextField2 = new JPasswordField();
@@ -47,7 +50,9 @@ public class RegisterView extends JPanel{
     private JPanel createInfoPanel( )
     {
         JPanel panel = new JPanel();
+
         panel.setLayout(new GridLayout(8, 2, 0, 4));
+
         panel.add(new JLabel("Name"));
         panel.add(userTextField);
         panel.add(new JLabel("Create Password"));
@@ -58,6 +63,8 @@ public class RegisterView extends JPanel{
         panel.add(adresTextField);
         panel.add(new JLabel("Email"));
         panel.add(mailAdressField);
+        panel.add(new JLabel("Password"));
+        panel.add(passwordField);
         panel.add(new JLabel("Account Balance"));
         panel.add(accountBalanceField);
         
@@ -99,4 +106,12 @@ public class RegisterView extends JPanel{
     {
         registerButton.removeActionListener(listener);
     }
+
+    public void addBackListener(ActionListener listener)
+    {
+        backButton.addActionListener(listener);
+    }
+
+
+
 }

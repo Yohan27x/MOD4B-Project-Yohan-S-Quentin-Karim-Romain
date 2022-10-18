@@ -1,5 +1,6 @@
 package Shop.controllers;
 
+import Shop.NavigationService;
 import Shop.views.LoginView;
 import java.awt.event.ActionEvent;
 import java.sql.*;
@@ -7,10 +8,19 @@ import java.sql.*;
 public class LoginController {
     private final LoginView view;
     
+
+    private final LoginView view;
+    private final Window window;
     
-    public LoginController(LoginView view)
-    {   
+    public LoginController(LoginView view, Window window)
+    {
+
         this.view = view;
+        this.window = window;
+
+        //window.getRootPane().setDefaultButton(view.getDefaultButton());
+        //view.focusUsername();
+
         view.addLoginListener(this::onLoginClicked);
         view.addRegisterListener(this::onRegisterClicked);
         
@@ -18,14 +28,21 @@ public class LoginController {
 
     private void onLoginClicked(ActionEvent event)
     {
+
         String userName = view.getLoginText();
         String pass = new String(view.getPasswordText());
         testUser(userName, pass);
+
+        System.out.println("yes");
+        // redirige vers la main page si l'email et le mdp correspondent dans le data base
+        NavigationService.displayMainPage(window);
+
     }
 
     private void onRegisterClicked(ActionEvent event)
     {
         System.out.println("yes");
+        NavigationService.displayRegisterPage(window);
         
     }
 
