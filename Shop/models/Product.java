@@ -10,7 +10,6 @@ public class Product {
     private int quantity;
     private String category;
     private String description;
-
     private String ImagePath;
     private int SKU;
 
@@ -18,11 +17,16 @@ public class Product {
 
     private int soldedQuantity;
 
-    public Product(String name, int price, String path){
+    public Product(String name, int price, String path, String category){
         this.name = name;
         this.price = price;
+        this.quantity = 10;
+        this.category = category;
+        this.description = "A very simple product!";
+
+
         ImagePath = path;
-        //ImagePath = "Shop/Images/JuiceBottle.png";
+
 
     }
     public String getName(){

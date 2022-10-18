@@ -3,12 +3,14 @@ import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
 
+import Shop.controllers.AccountBalanceController;
+import Shop.controllers.MainController;
 import Shop.controllers.ProductController;
+import Shop.models.Account;
 import Shop.models.ListOfProducts;
 import Shop.utility.Window;
-import Shop.views.LoginView;
-import Shop.views.ProductView;
-import Shop.views.RegisterView;
+import Shop.views.*;
+import com.sun.tools.javac.Main;
 
 
 public class Program {
@@ -21,6 +23,12 @@ public class Program {
     {
         useSystemLookAndFeel();
 
+        Window window = new Window("LoginPage", true);
+        NavigationService.displayLogInPage(window);
+        window.setVisible(true);
+
+        /*
+
 
         LoginView loginView = new LoginView();
         Window windowLoginView  = new Window("APPLICATION", loginView);
@@ -28,15 +36,28 @@ public class Program {
         RegisterView registerView = new RegisterView();
         Window windowRegisterView  = new Window("APPLICATION", registerView);
 
+        Account account = new Account();
+        MainView mainView = new MainView();
+        MainController mainController = new MainController(account,mainView);
+        Window windowMainView  = new Window("APPLICATION", mainView);
+
+        AccountBalanceView accountBalanceView = new AccountBalanceView();
+        Window windowAccountBalanceView = new Window("APPLICATION", accountBalanceView);
+        AccountBalanceController accountBalanceController = new AccountBalanceController(account, accountBalanceView);
+
+
         ListOfProducts listOfProducts = new ListOfProducts();
         ProductView productView = new ProductView();
-
         ProductController controller = new ProductController(productView, listOfProducts);
         Window windowProduct = new Window("APPLICATION", productView);
 
-        //windowLoginView.setVisible(true);
-        //windowRegisterView.setVisible(true);
+        windowLoginView.setVisible(true);
+        windowRegisterView.setVisible(true);
         windowProduct.setVisible(true);
+        windowAccountBalanceView.setVisible(true);
+        windowMainView.setVisible(true);
+
+         */
 
 
 
