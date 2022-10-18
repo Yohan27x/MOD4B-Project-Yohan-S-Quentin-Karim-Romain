@@ -1,4 +1,6 @@
 package Shop;
+import java.util.zip.ZipEntry;
+
 import javax.security.auth.login.LoginContext;
 import javax.swing.*;
 
@@ -9,8 +11,11 @@ import Shop.controllers.ProductController;
 import Shop.models.Account;
 import Shop.models.ListOfProducts;
 import Shop.utility.Window;
-import Shop.views.*;
-import com.sun.tools.javac.Main;
+import Shop.views.LoginView;
+import Shop.views.ProductView;
+
+import Shop.views.RegisterView;
+
 
 
 public class Program {
@@ -51,8 +56,10 @@ public class Program {
         ProductController controller = new ProductController(productView, listOfProducts);
         Window windowProduct = new Window("APPLICATION", productView);
 
-        windowLoginView.setVisible(true);
-        windowRegisterView.setVisible(true);
+        //windowLoginView.setVisible(true);
+        //windowRegisterView.setVisible(true);
+
+
         windowProduct.setVisible(true);
         windowAccountBalanceView.setVisible(true);
         windowMainView.setVisible(true);
