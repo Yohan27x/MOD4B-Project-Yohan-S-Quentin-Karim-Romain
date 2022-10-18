@@ -5,19 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class RegisterView extends JPanel{
-    private JLabel appName;
-    private JTextField userTextField;
-    private JTextField adresTextField;
-    private JTextField mailAdressField;
-    private JTextField accountBalanceField;
-    private JButton backButton;
-    private JButton registerButton;
+    private final JLabel appName;
+    private final JTextField userTextField;
+    private final JTextField adresTextField;
+    private final JTextField mailAdressField;
+    private final JPasswordField passwordField;
+    private final JTextField accountBalanceField;
+    private final JButton backButton;
+    private final JButton registerButton;
 
     public RegisterView(){
-        appName = new JLabel("Application Name");
+        appName = new JLabel("Register Page");
         userTextField = new JTextField();
         adresTextField = new JTextField();
         mailAdressField = new JTextField();
+        passwordField = new JPasswordField();
         accountBalanceField = new JTextField();
         backButton = new JButton("   Back   ");
         registerButton = new JButton("   Register   ");
@@ -43,13 +45,15 @@ public class RegisterView extends JPanel{
     private JPanel createInfoPanel( )
     {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2, 0, 4));
+        panel.setLayout(new GridLayout(5, 2, 0, 4));
         panel.add(new JLabel("Name"));
         panel.add(userTextField);
         panel.add(new JLabel("Adress"));
         panel.add(adresTextField);
         panel.add(new JLabel("Email"));
         panel.add(mailAdressField);
+        panel.add(new JLabel("Password"));
+        panel.add(passwordField);
         panel.add(new JLabel("Account Balance"));
         panel.add(accountBalanceField);
         return panel;
@@ -66,5 +70,11 @@ public class RegisterView extends JPanel{
         panel.add(LayoutHelper.createXLargeRigidArea());
         return panel;
     }
+
+    public void addBackListener(ActionListener listener)
+    {
+        backButton.addActionListener(listener);
+    }
+
 
 }
