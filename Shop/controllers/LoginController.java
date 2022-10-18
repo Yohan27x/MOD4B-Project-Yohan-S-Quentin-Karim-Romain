@@ -1,6 +1,7 @@
 package Shop.controllers;
 
 import Shop.NavigationService;
+import Shop.utility.Window;
 import Shop.views.LoginView;
 import java.awt.event.ActionEvent;
 import java.sql.*;
@@ -8,8 +9,6 @@ import java.sql.*;
 public class LoginController {
     private final LoginView view;
     
-
-    private final LoginView view;
     private final Window window;
     
     public LoginController(LoginView view, Window window)

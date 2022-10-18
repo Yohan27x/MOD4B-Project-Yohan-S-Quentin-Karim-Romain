@@ -36,20 +36,7 @@ public class Program {
         window.setVisible(true);
 
        
-        LoginController controller = new LoginController(loginView);
-        //ListOfProducts listOfProducts = new ListOfProducts();
-        //ProductView productview = new ProductView();
-
-        RegisterView registerView = new RegisterView();
-        RegisterController registerController = new RegisterController(registerView);
-        Window windowRegisterView = new Window("APPLICATION", registerView);
-
-        //ProductController controller = new ProductController(productview, listOfProducts);
-
-        //Window windowProduct = new Window("APPLICATION", productview);
-        windowLoginView.setVisible(true);
-        //windowRegisterView.setVisible(true);
-        //initializeDatabseHandeler();
+        
         
 
 

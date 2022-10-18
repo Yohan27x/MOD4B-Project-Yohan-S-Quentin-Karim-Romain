@@ -22,7 +22,6 @@ public class RegisterView extends JPanel{
         userTextField = new JTextField();
         adresTextField = new JTextField();
         mailAdressField = new JTextField();
-        passwordField = new JPasswordField();
         accountBalanceField = new JTextField();
         passwordTextField = new JPasswordField();
         passwordTextField2 = new JPasswordField();
@@ -63,8 +62,6 @@ public class RegisterView extends JPanel{
         panel.add(adresTextField);
         panel.add(new JLabel("Email"));
         panel.add(mailAdressField);
-        panel.add(new JLabel("Password"));
-        panel.add(passwordField);
         panel.add(new JLabel("Account Balance"));
         panel.add(accountBalanceField);
         
