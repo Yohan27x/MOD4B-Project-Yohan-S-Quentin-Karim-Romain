@@ -80,7 +80,7 @@ public class ProductView extends JPanel {
             }
         }
 
-        RefreshNumOfPage(listOfProducts);
+        RefreshNumOfPageAndProduct(listOfProducts);
 
         this.createAllProductPanels(listOfProducts);
         productsContainer.add(createProductContainer());
@@ -95,6 +95,7 @@ public class ProductView extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
+
         for (int i = debutRangeProduct; i <= endRangeProduct; i++) {
             if(i != numOfProducts-1){ // tant qu'on est pas sur le dernier élement
                 panel.add(AllProductPanels.get(i));
@@ -106,8 +107,8 @@ public class ProductView extends JPanel {
 
                 return panel;
             }
-
         }
+
 
         return panel;
 
@@ -199,14 +200,18 @@ public class ProductView extends JPanel {
     
     public void refreshProductsContainer(ListOfProducts listOfProducts){
 
-        RefreshNumOfPage(listOfProducts);
+        RefreshNumOfPageAndProduct(listOfProducts);
 
         productsContainer.removeAll();
-        productsContainer.add(createProductContainer());
+
+        if(numOfProducts != 0){
+            productsContainer.add(createProductContainer());
+        }
+
 
     }
 
-    private void RefreshNumOfPage(ListOfProducts listOfProducts){
+    private void RefreshNumOfPageAndProduct(ListOfProducts listOfProducts){
 
         numOfProducts = listOfProducts.AllAvailableProducts.size();
 

@@ -48,8 +48,7 @@ public class ProductController {
 
         view.setFirstPageNumber("1");
 
-        listOfProducts.AllAvailableProducts.remove(3);
-
+        listOfProducts.AllAvailableProducts.remove(0);
 
         view.refreshProductsContainer(listOfProducts);
         view.createAllProductPanels(listOfProducts);
