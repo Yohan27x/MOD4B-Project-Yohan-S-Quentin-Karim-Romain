@@ -33,8 +33,6 @@ public class ProductController {
         view.addActiveFilterListener(this::OnActiveFilterClicked);
 
         view.addCartListener(this::OnAccesCartClicked);
-        view.addIncreaseQuantityListener(this::OnIncreaseQuantityClicked);
-        view.addDecreaseQuantityListener(this::OnDecreaseQuantityClicked);
 
         view.addNextPageListener(this::OnNextPageClicked);
         view.addPreviousPageListener(this::OnPreviousPageClicked);
@@ -47,36 +45,70 @@ public class ProductController {
 
     }
 
-    private void OnActiveFilterClicked(ActionEvent event){
-        // ...
-
-    }
-
-    private void OnIncreaseQuantityClicked(ActionEvent event){
-        // ...
-
-
-    }
-
-    private void OnDecreaseQuantityClicked(ActionEvent event){
-        // ...
-
-    }
-
     private void OnAccesCartClicked(ActionEvent event){
         NavigationService.displayCartPage(window);
+        System.out.println("test");
 
     }
 
+    private void OnActiveFilterClicked(ActionEvent event){
+        // todo filter !
 
+    }
 
     private void OnNextPageClicked(ActionEvent event){
-        view.increasePageNumber();
+        if(view.getPageNumber() < view.getMaxPageNumber()){
+            int newFirstPageNumber = view.getPageNumber();
+            newFirstPageNumber += 1;
+            view.changePageNumber(1);
+            view.setFirstPageNumber(newFirstPageNumber + "") ;
+
+            int newDebutRangeProduct = view.getDebutRangeProduct() + view.getProductPerPage();
+            view.setDebutRangeProduct(newDebutRangeProduct);
+
+            int newEndRangeProduct = view.getEndRangeProduct() + view.getProductPerPage();
+            view.setEndRangeProduct(newEndRangeProduct);
+
+            System.out.println(view.getFirstPageNumber());
+
+            view.refreshProductsContainer();
+
+        }
+        else{
+            view.displayErrorMessage("You are at the last page, there are no more products to see");
+        }
+
 
     }
 
     private void OnPreviousPageClicked(ActionEvent event){
-        view.decreasePageNumber();
+        if(view.getPageNumber() > 1){
+            int newFirstPageNumber = view.getPageNumber();
+            newFirstPageNumber -= 1;
+            view.changePageNumber(-1);
+            view.setFirstPageNumber(newFirstPageNumber + "");
+
+
+            int newDebutRangeProduct = view.getDebutRangeProduct() - 2;
+            view.setDebutRangeProduct(newDebutRangeProduct);
+
+            int newEndRangeProduct = view.getEndRangeProduct() - 2;
+            view.setEndRangeProduct(newEndRangeProduct);
+
+            System.out.println(view.getFirstPageNumber());
+
+            view.refreshProductsContainer();
+
+
+
+        }
+        else{
+            view.displayErrorMessage("You are on the first page, you cannot go any page further back!");
+        }
+
+
+
+
 
     }
 

@@ -1,32 +1,33 @@
 package Shop.views;
 
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
+import Shop.controllers.ProductPanelController;
 import Shop.models.ListOfProducts;
 import Shop.utility.LayoutHelper;
 import Shop.models.Product;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ProductView extends JPanel {
 
-    private final JLabel welcomeMessage;
     private JTextField filterNameTextField;
     private JButton activeFilter;
     private JComboBox categoryFilter;
+    private final JLabel errorMessage;
     private JButton BackMainMenu;
     private JButton accesCart;
-    private JButton AddToCart;
+
+    private JButton AddToCartFirst;
+    private JButton AddToCartSecond;
+    private JButton[] AddToCartButtons;
+
+    private int chooseRightAddCartButton = 0;
     private JLabel ProductName;
     private JLabel ProductImage;
     private JLabel ProductPrice;
@@ -35,29 +36,30 @@ public class ProductView extends JPanel {
     private JLabel ProductCategory;
     private JLabel ProductQuantityLeft;
     private JLabel ProductQuantityChoosen;
-
     private JButton increaseQuantity;
     private JButton decreaseQuantity;
-    private JPanel productContainer;
+    private JPanel productsContainer;
     private int widthImage = 55;
     private int heightImage = 55;
     private JLabel firstPageNumber;
     private JLabel lastPageNumber;
     private int pageNumber = 1;
     private int maxPageNumber;
-
     private int productPerPage = 2;
     private JButton NextProductPageButton;
     private JButton PreviousProductPageButton;
     private int debutRangeProduct = 0;
     private int endRangeProduct = 1;
     private ArrayList<JPanel> AllProductPanels = new ArrayList<>();
+
+    //private ArrayList<ProductPanelController> productPanelControllers = new ArrayList<>();
     private ListOfProducts listOfProducts = new ListOfProducts();
     private ArrayList<String> productCategory = new ArrayList<>();
 
 
+
+
     public ProductView() {
-        welcomeMessage = createValueLabel("BrowseProductPage ");
 
         NextProductPageButton = new JButton("NextProductPage -->");
         PreviousProductPageButton  = new JButton("<-- PreviousProductPage");
@@ -66,7 +68,7 @@ public class ProductView extends JPanel {
         activeFilter = new JButton("Active filter");
         filterNameTextField = new JTextField();
 
-
+        errorMessage = createErrorLabel("");
 
         firstPageNumber = createValueLabel(pageNumber + "");
         lastPageNumber = createValueLabel("");
@@ -76,12 +78,14 @@ public class ProductView extends JPanel {
         setBorder(LayoutHelper.createLargeEmptyBorder());
 
         add(createButtonsPanel());
-        add(createTitle(welcomeMessage));
         add(createFilterPanel());
+        add(createErrorMessagePanel());
 
         this.createAllProductPanels(listOfProducts);
-        productContainer = createProductContainer();
-        add(productContainer);
+
+        productsContainer = new JPanel();
+        productsContainer.add(createProductContainer());
+        add(productsContainer);
 
         add(createProductBrowseButtonsPanel());
     }
@@ -97,7 +101,7 @@ public class ProductView extends JPanel {
         }
 
         maxPageNumber = ((listOfProducts.AllAvailableProducts.size())/productPerPage);
-        System.out.println("max page number : " + maxPageNumber);
+        //System.out.println("max page number : " + maxPageNumber);
         lastPageNumber.setText(maxPageNumber + "");
 
         DefaultComboBoxModel<String> modelCategoryBox = new DefaultComboBoxModel<>( productCategory.toArray(new String[0]) );
@@ -109,8 +113,6 @@ public class ProductView extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
-        System.out.println(debutRangeProduct + " " + endRangeProduct);
 
         for (int i = debutRangeProduct; i <= endRangeProduct; i++) {
             panel.add(AllProductPanels.get(i));
@@ -126,9 +128,12 @@ public class ProductView extends JPanel {
 
         for (int i = 0; i < listOfProducts.AllAvailableProducts.size(); i++){
 
-            JPanel productPanel = new JPanel();
-            productPanel = createProductPanel(listOfProducts.AllAvailableProducts.get(i));
+            //JPanel productPanel;
+            //productPanel = createProductPanel(listOfProducts.AllAvailableProducts.get(i));
+            ProductPanel productPanel = new ProductPanel(listOfProducts.AllAvailableProducts.get(i));
+            ProductPanelController productPanelController = new ProductPanelController(productPanel);
 
+            //productPanelControllers.add(productPanelController);
             AllProductPanels.add(productPanel);
 
         }
@@ -142,7 +147,6 @@ public class ProductView extends JPanel {
         Border raisedetched;
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         panel.setBorder(raisedetched);
-
 
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -159,9 +163,11 @@ public class ProductView extends JPanel {
         ProductQuantityChoosen = new JLabel("QuantityChoosen : 25 ");
         ProductCategory = new JLabel(product.getCategory());
 
+
+
         decreaseQuantity = new JButton("Decrease");
         increaseQuantity = new JButton("Increase");
-        AddToCart = new JButton("Add to cart");
+
 
 
         c.gridx = 0;
@@ -204,11 +210,18 @@ public class ProductView extends JPanel {
         c.ipady = 10;
         c.gridx = 4;
         c.gridy = 3;
-        panel.add(AddToCart, c);
+
+        AddToCartFirst = new JButton("AddToCart 1");
+        AddToCartSecond = new JButton("AddToCart 2");
+        AddToCartButtons = new JButton[]{AddToCartFirst, AddToCartSecond};
 
 
+        panel.add(AddToCartButtons[chooseRightAddCartButton], c);
 
-
+        chooseRightAddCartButton++;
+        if(chooseRightAddCartButton == AddToCartButtons.length){
+            chooseRightAddCartButton = 0;
+        }
 
 
         //decreaseQuantity = new JButton("Decrease");
@@ -234,7 +247,7 @@ public class ProductView extends JPanel {
     {
         JPanel panel = new JPanel();
 
-        add(LayoutHelper.createLargeRigidArea()); // to create space between products panel and the choose page buttons panel
+        //add(LayoutHelper.createLargeRigidArea()); to create space between products panel and the choose page buttons panel
 
         panel.add(PreviousProductPageButton);
 
@@ -259,36 +272,44 @@ public class ProductView extends JPanel {
         return label;
     }
 
-    public void increasePageNumber(){
-        // vérifier qu'on est toujours en dessous
-        if(pageNumber < maxPageNumber){
-            firstPageNumber.setText(++pageNumber +"") ;
-
-            debutRangeProduct += productPerPage;
-            endRangeProduct += productPerPage;
-
-            productContainer.removeAll();
-            productContainer.add(createProductContainer());
-
-        }
-
-
-
+    private static JLabel createErrorLabel(String text)
+    {
+        JLabel label = new JLabel(text);
+        Font font = label.getFont();
+        label.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
+        label.setForeground(Color.RED);
+        return label;
     }
 
-    public void decreasePageNumber(){
-        if(pageNumber > 1){
-            firstPageNumber.setText(--pageNumber +"") ;
-            endRangeProduct -= 2;
-            debutRangeProduct -= 2;
+    private JPanel createErrorMessagePanel()
+    {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.add(errorMessage);
+        return panel;
+    }
 
-            productContainer.removeAll();
-            productContainer.add(createProductContainer());
+    public void displayErrorMessage(String message)
+    {
+        errorMessage.setText(message);
+    }
 
-            System.out.println(ProductName.getText());
+    public int getPageNumber(){return pageNumber;}
+    public void changePageNumber(int num){ pageNumber += num;}
+    public int getMaxPageNumber(){return maxPageNumber;}
+    public String getFirstPageNumber(){ return firstPageNumber.getText();}
+    public void setFirstPageNumber(String newPageNumber){ firstPageNumber.setText(newPageNumber);}
+    public int getDebutRangeProduct(){return debutRangeProduct;}
+    public void setDebutRangeProduct(int newDebutRangeProduct){  debutRangeProduct = newDebutRangeProduct;}
+    public int getEndRangeProduct(){return endRangeProduct;}
+    public void setEndRangeProduct(int newEndRangeProduct){ endRangeProduct = newEndRangeProduct;}
+    public int getProductPerPage(){return productPerPage;}
 
+    
+    public void refreshProductsContainer(){
+        productsContainer.removeAll();
+        productsContainer.add(createProductContainer());
 
-        }
     }
 
     private JPanel createButtonsPanel()
@@ -296,10 +317,9 @@ public class ProductView extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 1, 10, 10));
 
-
         panel.add(BackMainMenu);
         panel.add(LayoutHelper.createRigidArea());
-        panel.setBorder(LayoutHelper.addMargin(LayoutHelper.createEmptyBorder()));
+
         panel.add(accesCart);
 
 
@@ -332,14 +352,14 @@ public class ProductView extends JPanel {
 
     }
 
-    public int getPageNumber(){
-        return pageNumber;
-    }
+
 
 
     public void addBackMainListener(ActionListener listener){ BackMainMenu.addActionListener(listener);}
     public void addActiveFilterListener(ActionListener listener){  activeFilter.addActionListener(listener);}
     public void addCartListener(ActionListener listener){accesCart.addActionListener(listener);}
+    public void addAddToCartFirstListener(ActionListener listener){AddToCartFirst.addActionListener(listener);}
+    public void addAddToCartSecondListener(ActionListener listener){AddToCartSecond.addActionListener(listener);}
     public void addIncreaseQuantityListener(ActionListener listener){increaseQuantity.addActionListener(listener);}
     public void addDecreaseQuantityListener(ActionListener listener){decreaseQuantity.addActionListener(listener);}
     public void addNextPageListener(ActionListener listener)

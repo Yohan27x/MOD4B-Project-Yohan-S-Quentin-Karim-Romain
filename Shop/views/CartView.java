@@ -13,6 +13,10 @@ public class CartView extends JPanel {
     private final JButton clearCartButton;
     private final JButton CheckOutButton;
 
+    // todo ajouter scrollPane
+    // todo créer component panel
+
+
     public CartView(){
 
         backMainButton = new JButton("BackMainPage");
