@@ -6,9 +6,8 @@ import java.text.NumberFormat;
 import java.util.Objects;
 import java.util.Random;
 
-import Shop.NavigationService;
 import Shop.utility.Window;
-
+import Shop.NavigationService;
 import Shop.formatting.CurrencyHelper;
 import Shop.models.ListOfProducts;
 import Shop.views.ProductView;
