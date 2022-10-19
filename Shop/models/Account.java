@@ -14,7 +14,7 @@ public class Account {
 
     public Account(){
         // MYSQL Data
-        this.name = "Yohan";
+        this.name = "";
         this.balance = 100.0;
         listeners = new ArrayList<>();
 

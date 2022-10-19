@@ -47,24 +47,31 @@ public class LoginController {
         final static String password = "password";
         public static boolean testUser (String string, String pass) {
             try (Connection connection = DriverManager.getConnection(url, username, password)){
-                int yes = 0;
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT UserName,Password FROM userdb WHERE UserName='"+ string +"' AND Password='"+ pass+ "'");
+                String query = "SELECT UserName,Password FROM userdb WHERE UserName= ? AND Password= ?";
+                String query2 = "UPDATE `shop`.`userdb` SET `logged` = '1' WHERE (`UserName` = ?)";
+                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement2 = connection.prepareStatement(query2);
+                statement.setString(1, string);
+                statement.setString(2, pass);
+                statement2.setString(1, string);
+                ResultSet resultSet = statement.executeQuery();
+                int rowsAffected = statement2.executeUpdate();
                 while(resultSet.next()){
-                    yes++;
                     System.out.println("================================================================================================================");
                     System.out.println(resultSet.getString("UserName"));
                     System.out.println(resultSet.getString("Password"));
                     System.out.println("================================================================================================================");
                 }
-                
-                if (yes==0){
-                    System.out.println("User not recognized");
+                if (rowsAffected > 0){
+                    return true;
+                }else{
                     return false;
                 }
-                return true;
+               
+                
             } catch (SQLException e) {
                 throw new IllegalStateException("Cannot connect the database!", e);
             }
         }
 }
+
