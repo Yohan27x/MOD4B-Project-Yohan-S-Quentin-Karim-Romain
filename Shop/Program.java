@@ -32,7 +32,8 @@ public class Program {
         useSystemLookAndFeel();
 
         Window window = new Window("LoginPage", true);
-        NavigationService.displayLogInPage(window);
+        //NavigationService.displayLogInPage(window);
+        NavigationService.displayMainPage(window);
         window.setVisible(true);
 
        

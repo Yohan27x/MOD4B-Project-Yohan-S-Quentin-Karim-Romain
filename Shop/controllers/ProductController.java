@@ -72,6 +72,8 @@ public class ProductController {
 
             view.refreshProductsContainer();
 
+            view.displayErrorMessage(""); // erase an possible error message that happened before
+
         }
         else{
             view.displayErrorMessage("You are at the last page, there are no more products to see");
@@ -97,6 +99,8 @@ public class ProductController {
             System.out.println(view.getFirstPageNumber());
 
             view.refreshProductsContainer();
+
+            view.displayErrorMessage(""); // erase an possible error message that happened before
 
 
 
