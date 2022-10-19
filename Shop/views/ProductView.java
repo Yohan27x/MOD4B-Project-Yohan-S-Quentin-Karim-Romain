@@ -131,7 +131,7 @@ public class ProductView extends JPanel {
             //JPanel productPanel;
             //productPanel = createProductPanel(listOfProducts.AllAvailableProducts.get(i));
             ProductPanel productPanel = new ProductPanel(listOfProducts.AllAvailableProducts.get(i));
-            ProductPanelController productPanelController = new ProductPanelController(productPanel);
+            new ProductPanelController(productPanel);
 
             //productPanelControllers.add(productPanelController);
             AllProductPanels.add(productPanel);

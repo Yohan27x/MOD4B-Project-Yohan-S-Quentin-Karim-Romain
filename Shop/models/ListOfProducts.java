@@ -15,7 +15,7 @@ public class ListOfProducts {
         Product product3 = new Product("Chocolate", 3,"Shop/Images/chocolate.png" , "object");
         Product product4 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "food");
         Product product5 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "elec");
-        Product product6 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "elec");
+        Product product6 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "test");
         Product product7 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "elec");
         AllAvailableProducts.add(product1);
         AllAvailableProducts.add(product2);
