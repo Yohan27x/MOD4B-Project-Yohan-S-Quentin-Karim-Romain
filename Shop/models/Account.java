@@ -1,5 +1,6 @@
 package Shop.models;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Account {
@@ -12,10 +13,34 @@ public class Account {
     // private past order
     private final ArrayList<IAccountListener> listeners;
 
+    final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
+    final static String username = "java";
+    final static String passwordd = "password";
+    public ArrayList<String> nameUser () {
+        try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
+                ArrayList<String> userData = new ArrayList<String>();
+                String query = "SELECT UserName, Balance FROM userdb WHERE logged=true";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                
+                while(resultSet.next()){
+                    userData.add(resultSet.getString("UserName"));
+                    userData.add(resultSet.getString("Balance"));
+                }
+                
+                return userData;
+                
+                
+            } catch (SQLException e) {
+                throw new IllegalStateException("Nique ?", e);
+            }
+        }
+
     public Account(){
         // MYSQL Data
-        this.name = "";
-        this.balance = 100.0;
+        
+        this.name = nameUser().get(0);
+        this.balance = Double.parseDouble(nameUser().get(1));
         listeners = new ArrayList<>();
 
     }
@@ -33,13 +58,28 @@ public class Account {
 
     public void setBalance(double balance)
     {
-        if (this.balance != balance)
+        try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
+            if (this.balance != balance)
         {
             this.balance = balance;
+            String query = "SELECT Balance FROM userdb WHERE logged=true";
+            String query2 ="UPDATE `shop`.`userdb` SET Balance = ? WHERE (logged=true)";
+            PreparedStatement statement2 = connection.prepareStatement(query2);
+            statement2.setDouble(1, balance);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()){
+                int rowsAffected = statement2.executeUpdate();
+            }   
             for (IAccountListener listener : listeners)
                 listener.balanceChanged(balance);
         }
+                   
+        } catch (SQLException e) {
+            throw new IllegalStateException("Nique ?", e);
+        }
     }
+        
 
     public void addListener(IAccountListener listener)
     {
