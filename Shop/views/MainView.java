@@ -15,6 +15,8 @@ public class MainView extends JPanel{
     private final JButton cartButton;
     private final JButton pastOrderButton;
     private final JButton storeBalanceButton;
+    private final JButton logOutButton;
+
 
     final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
     final static String username = "java";
@@ -49,6 +51,7 @@ public class MainView extends JPanel{
         pastOrderButton = new JButton("   ViewPastOrders   ");
         storeBalanceButton = new JButton("   AdjustBalance   ");
         cartButton = new JButton("   ViewCart   ");
+        logOutButton = new JButton("   LogOut   ");
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createLargeEmptyBorder());
@@ -56,6 +59,7 @@ public class MainView extends JPanel{
         add(createTitle(welcomeMessage));
         add(createBrowseButton());
         add(createViewOrderBalanceButton());
+        add(createLogoutButton());
 
 
     }
@@ -95,6 +99,13 @@ public class MainView extends JPanel{
         return panel;
 
     }
+    private JPanel createLogoutButton() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 1, 3, 3));
+        panel.add(logOutButton);
+        return panel;
+
+    }
 
     private static JLabel createValueLabel(String text)
     {
@@ -118,5 +129,9 @@ public class MainView extends JPanel{
 
     public void addPastOrdersListener(ActionListener listener){
         pastOrderButton.addActionListener(listener);
+    }
+
+    public void addLogOutListener(ActionListener listener){
+        logOutButton.addActionListener(listener);
     }
 }
