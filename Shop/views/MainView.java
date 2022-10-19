@@ -5,6 +5,7 @@ import Shop.models.Account;
 import Shop.utility.LayoutHelper;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 
 public class MainView extends JPanel{
@@ -15,10 +16,37 @@ public class MainView extends JPanel{
     private final JButton pastOrderButton;
     private final JButton storeBalanceButton;
 
+    final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
+    final static String username = "java";
+    final static String password = "password";
+    public String nameUser () {
+        try (Connection connection = DriverManager.getConnection(url, username, password)){
+                String query = "SELECT UserName FROM userdb WHERE logged=? ";
+                PreparedStatement statement = connection.prepareStatement(query);
+                
+                statement.setBoolean(1, true);
+               
+                ResultSet resultSet = statement.executeQuery();
+                
+                while(resultSet.next()){
+                    System.out.println("================================================================================================================");
+                    System.out.println(resultSet.getString("UserName"));
+                    System.out.println("================================================================================================================");
+                    return resultSet.getString("UserName");
+                }
+                
+                
+                
+                
+            } catch (SQLException e) {
+                throw new IllegalStateException("Nique ?", e);
+            }
+        return "Unknown";
+        }
     public MainView(){
 
 
-        welcomeMessage = createValueLabel("Welcome " + userName);
+        welcomeMessage = createValueLabel("Welcome " + nameUser());
 
         browseButton = new JButton("   BrowseProduct   ");
         pastOrderButton = new JButton("   ViewPastOrders   ");
@@ -37,7 +65,7 @@ public class MainView extends JPanel{
 
     public void initialize(Account account)
     {
-        welcomeMessage.setText("Welcome, " + account.getName() + "!");
+        welcomeMessage.setText("Welcome, " + nameUser() + "!");
     }
 
 
