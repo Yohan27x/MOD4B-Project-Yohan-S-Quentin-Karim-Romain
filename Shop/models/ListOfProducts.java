@@ -10,20 +10,17 @@ public class ListOfProducts {
 
         // retrieve MySQL data ...
 
-        Product product1 = new Product("Orange", 5, "Shop/Images/JuiceBottle.png", "food");
-        Product product2 = new Product("Watermelon", 3, "Shop/Images/watermelon.png", "food");
-        Product product3 = new Product("Chocolate", 3,"Shop/Images/chocolate.png" , "object");
-        Product product4 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "food");
-        Product product5 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "elec");
-        Product product6 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "test");
-        Product product7 = new Product("Strawberry", 7, "Shop/Images/strawberry.png", "elec");
+        Product product1 = new Product("Orange", 5, "https://static.wikia.nocookie.net/minecraft/images/e/e5/AppleOld.png/revision/latest?cb=20200805163025", "food");
         AllAvailableProducts.add(product1);
+        Product product2 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "armor");
         AllAvailableProducts.add(product2);
+        Product product3 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
         AllAvailableProducts.add(product3);
+        Product product4 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
         AllAvailableProducts.add(product4);
+        Product product5 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
         AllAvailableProducts.add(product5);
-        AllAvailableProducts.add(product6);
-        AllAvailableProducts.add(product7);
+
 
     }
 

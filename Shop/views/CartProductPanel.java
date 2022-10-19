@@ -11,16 +11,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
-public class ProductPanel extends JPanel {
+public class CartProductPanel extends JPanel {
 
     private final JLabel errorMessage;
 
-    private final JButton AddToCart;
+    private final JButton removeOfCart;
     private final JLabel ProductName;
     private final JLabel ProductImage;
     private final JLabel ProductPrice;
     private final JLabel ProductDescription;
-
     private final JLabel ProductSKU;
     private final JLabel ProductCategory;
     private final JLabel ProductQuantityLeft;
@@ -31,7 +30,7 @@ public class ProductPanel extends JPanel {
     private static final int HEIGHT = 50;
 
 
-    public ProductPanel(Product product){
+    public CartProductPanel(Product product){
 
         Border raisedetched;
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
@@ -60,7 +59,7 @@ public class ProductPanel extends JPanel {
 
         decreaseQuantity = new JButton("Decrease");
         increaseQuantity = new JButton("Increase");
-        AddToCart = new JButton("Add to cart");
+        removeOfCart = new JButton("Remove of cart");
 
         try {
             String path = product.getImagePath();
@@ -142,7 +141,7 @@ public class ProductPanel extends JPanel {
         c.ipady = 10;
         c.gridx = 4;
         c.gridy = 6;
-        add(AddToCart, c);
+        add(removeOfCart, c);
 
     }
 
@@ -193,9 +192,7 @@ public class ProductPanel extends JPanel {
         return ProductSKU.getText();
     }
 
-    public void setProductQuantityChoosen(String newQuantityChoosen){
-        ProductQuantityChoosen.setText(newQuantityChoosen);
-    }
+    public void setProductQuantityChoosen(String newQuantityChoosen){ProductQuantityChoosen.setText(newQuantityChoosen);}
 
     public void setProductQuantityLeft(String newQuantityLeft){
         ProductQuantityLeft.setText(newQuantityLeft);
@@ -203,11 +200,8 @@ public class ProductPanel extends JPanel {
 
     public void addIncreaseQuantityListener(ActionListener listener){increaseQuantity.addActionListener(listener);}
     public void addDecreaseQuantityListener(ActionListener listener){decreaseQuantity.addActionListener(listener);}
-    public void addAddToCartListener(ActionListener listener){AddToCart.addActionListener(listener);}
-
-
-
-
-
+    public void addRemoveOfCartListener(ActionListener listener){removeOfCart.addActionListener(listener);}
 
 }
+
+
