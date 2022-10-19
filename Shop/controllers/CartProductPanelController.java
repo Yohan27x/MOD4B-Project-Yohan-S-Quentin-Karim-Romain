@@ -1,26 +1,27 @@
 package Shop.controllers;
 
+import Shop.views.CartProductPanel;
 import Shop.views.ProductPanel;
 
 import java.awt.event.ActionEvent;
 
-public class ProductPanelController {
+public class CartProductPanelController {
 
-    private final ProductPanel view;
+    private final CartProductPanel view;
 
-    public ProductPanelController(ProductPanel view){
+    public CartProductPanelController(CartProductPanel view){
+
         this.view = view;
 
-        view.addAddToCartListener(this::OnAddToCartClicked);
+        view.addRemoveOfCartListener(this::OnRemoveOfCartClicked);
         view.addIncreaseQuantityListener(this::OnIncreaseQuantityClicked);
         view.addDecreaseQuantityListener(this::OnDecreaseQuantityClicked);
     }
 
-    private void OnAddToCartClicked(ActionEvent event){
-        System.out.println("name : " + view.getProductName());
+    private void OnRemoveOfCartClicked(ActionEvent event){
+        System.out.println("retirer du panier " + view.getProductName());
 
     }
-
     private void OnIncreaseQuantityClicked(ActionEvent event) {
 
         int productQuantityChoosenInt = Integer.parseInt(view.getProductQuantityChoosen());
@@ -36,7 +37,7 @@ public class ProductPanelController {
 
         }
         else{
-           view.displayErrorMessage("cannot Increase more !");
+            view.displayErrorMessage("cannot Increase more !");
 
         }
 
@@ -59,5 +60,4 @@ public class ProductPanelController {
             view.displayErrorMessage("cannot decrease more !");
         }
     }
-
 }

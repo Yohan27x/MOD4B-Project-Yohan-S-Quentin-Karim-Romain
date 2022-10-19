@@ -1,6 +1,7 @@
 package Shop.views;
 
 import Shop.NavigationService;
+import Shop.controllers.CartProductPanelController;
 import Shop.models.ListOfProducts;
 import Shop.utility.LayoutHelper;
 
@@ -13,7 +14,7 @@ public class CartView extends JPanel {
 
     private final JButton backMainButton;
     private final JButton clearCartButton;
-    private final JButton CheckOutButton;
+    private final JButton checkOutButton;
 
     private final JLabel subTotal;
     private final JLabel taxTotal;
@@ -26,15 +27,13 @@ public class CartView extends JPanel {
 
     public CartView(){
 
-
-
         subTotal = new JLabel("subtotal");
         taxTotal = new JLabel("taxtotal");
         totalPrice = new JLabel("totalprice");
 
         backMainButton = new JButton("BackMainPage");
         clearCartButton = new JButton("Clear Cart");
-        CheckOutButton = new JButton("CheckOut");
+        checkOutButton = new JButton("CheckOut");
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createEmptyBorder());
@@ -42,11 +41,12 @@ public class CartView extends JPanel {
         add(createButtonUpPage());
 
         CartProductPanel cartProductPanel1 = new CartProductPanel(listOfProducts.AllAvailableProducts.get(0));
-        CartProductPanel cartProductPanel2 = new CartProductPanel(listOfProducts.AllAvailableProducts.get(0));
+        CartProductPanel cartProductPanel2 = new CartProductPanel(listOfProducts.AllAvailableProducts.get(1));
+        new CartProductPanelController(cartProductPanel1);
+        new CartProductPanelController(cartProductPanel2);
+
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-
-
         container.add(cartProductPanel1);
         container.add(cartProductPanel2);
 
@@ -103,7 +103,7 @@ public class CartView extends JPanel {
         panel.setBorder(LayoutHelper.createEmptyBorder());
 
         panel.add(clearCartButton);
-        panel.add(CheckOutButton);
+        panel.add(checkOutButton);
 
 
         return panel;
@@ -113,5 +113,15 @@ public class CartView extends JPanel {
     {
         backMainButton.addActionListener(listener);
     }
+    public void addClearCartListener(ActionListener listener)
+    {
+        clearCartButton.addActionListener(listener);
+    }
+
+    public void addCheckOutListener(ActionListener listener)
+    {
+        checkOutButton.addActionListener(listener);
+    }
+
 
 }
