@@ -25,6 +25,7 @@ public class ProductController {
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
+        listOfProducts.FillUShopAvailableProduct();
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::OnBackMainClicked);
