@@ -18,16 +18,28 @@ public class CartController {
         this.view = view;
         this.window = window;
 
-        //window.getRootPane().setDefaultButton(view.getDefaultButton());
-        //view.focusUsername();
 
         view.addBackMainListener(this::onBackMainClicked);
+        view.addClearCartListener(this::OnClearCartClicked);
+        view.addCheckOutListener(this::OnCheckOutClicked);
 
     }
 
     private void onBackMainClicked(ActionEvent event)
     {
         NavigationService.displayMainPage(window);
+    }
+
+    private void OnClearCartClicked(ActionEvent event)
+    {
+        System.out.println("cart clear");
+        //NavigationService.displayMainPage(window);
+    }
+
+    private void OnCheckOutClicked(ActionEvent event)
+    {
+        System.out.println("checkout");
+        //NavigationService.displayMainPage(window);
     }
 
 

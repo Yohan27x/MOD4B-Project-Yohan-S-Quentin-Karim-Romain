@@ -28,21 +28,18 @@ public class ProductView extends JPanel {
     private int pageNumber = 1;
     private int maxPageNumber;
     private int productPerPage = 2;
-
     private int numOfProducts;
     private JButton NextProductPageButton;
     private JButton PreviousProductPageButton;
     private int debutRangeProduct = 0;
     private int endRangeProduct = 1;
     private ArrayList<JPanel> AllProductPanels = new ArrayList<>();
-    private ListOfProducts listOfProducts = new ListOfProducts();
     private ArrayList<String> productCategory = new ArrayList<>();
 
 
 
 
     public ProductView() {
-
 
         NextProductPageButton = new JButton("NextProductPage -->");
         PreviousProductPageButton  = new JButton("<-- PreviousProductPage");
@@ -74,7 +71,6 @@ public class ProductView extends JPanel {
     }
 
     public void initialize(ListOfProducts listOfProducts){
-        this.listOfProducts = listOfProducts;
         this.productCategory.clear();
 
         // initialise les différentes catégories de produits
@@ -84,17 +80,8 @@ public class ProductView extends JPanel {
             }
         }
 
-        int numOfAvailableProduct = listOfProducts.AllAvailableProducts.size();
-        if(numOfAvailableProduct / 2 == 0){
-            maxPageNumber = ((listOfProducts.AllAvailableProducts.size())/productPerPage);
-        }
-        else{ // if odd number of available product
-            maxPageNumber = ((listOfProducts.AllAvailableProducts.size())/productPerPage + 1);
-        }
+        RefreshNumOfPage(listOfProducts);
 
-        lastPageNumber.setText(maxPageNumber + "");
-
-        // todo permet de ne pas initialisel la liste de produit dans le view mais juste dans le controller mais en contrepartie bug de taille de la fenetre
         this.createAllProductPanels(listOfProducts);
         productsContainer.add(createProductContainer());
 
@@ -108,15 +95,18 @@ public class ProductView extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-        int endRangeProductChoice = endRangeProduct;
-        if(endRangeProductChoice / 2 == 1) {
-            endRangeProductChoice -= 1;
-        }
+        for (int i = debutRangeProduct; i <= endRangeProduct; i++) {
+            if(i != numOfProducts-1){ // tant qu'on est pas sur le dernier élement
+                panel.add(AllProductPanels.get(i));
+                panel.add(LayoutHelper.createRigidArea());
+            }
+            else{
+                panel.add(AllProductPanels.get(i));
+                panel.add(LayoutHelper.createRigidArea());
 
+                return panel;
+            }
 
-        for (int i = debutRangeProduct; i <= endRangeProductChoice; i++) {
-            panel.add(AllProductPanels.get(i));
-            panel.add(LayoutHelper.createRigidArea());
         }
 
         return panel;
@@ -125,8 +115,10 @@ public class ProductView extends JPanel {
 
 
 
-    private void createAllProductPanels(ListOfProducts listOfProducts){
+    public void createAllProductPanels(ListOfProducts listOfProducts){
 
+
+        System.out.println("create againt all panels");
         numOfProducts = listOfProducts.AllAvailableProducts.size();
 
         for (int i = 0; i < listOfProducts.AllAvailableProducts.size(); i++){
@@ -205,9 +197,29 @@ public class ProductView extends JPanel {
     public int getProductPerPage(){return productPerPage;}
 
     
-    public void refreshProductsContainer(){
+    public void refreshProductsContainer(ListOfProducts listOfProducts){
+
+        RefreshNumOfPage(listOfProducts);
+
         productsContainer.removeAll();
         productsContainer.add(createProductContainer());
+
+    }
+
+    private void RefreshNumOfPage(ListOfProducts listOfProducts){
+
+        numOfProducts = listOfProducts.AllAvailableProducts.size();
+
+        int numOfAvailableProduct = numOfProducts;
+        if(numOfAvailableProduct % 2 == 0){
+
+            maxPageNumber = ((numOfAvailableProduct)/productPerPage);
+        }
+        else{ // if odd number of available product
+            maxPageNumber = ((numOfAvailableProduct)/productPerPage + 1);
+        }
+
+        lastPageNumber.setText(maxPageNumber + "");
 
     }
 
@@ -255,7 +267,7 @@ public class ProductView extends JPanel {
 
 
     public void addBackMainListener(ActionListener listener){ BackMainMenu.addActionListener(listener);}
-    public void addActiveFilterListener(ActionListener listener){  activeFilter.addActionListener(listener);}
+    public void addActiveFilterListener(ActionListener listener){ activeFilter.addActionListener(listener);}
     public void addCartListener(ActionListener listener){accesCart.addActionListener(listener);}
     public void addNextPageListener(ActionListener listener)
     {

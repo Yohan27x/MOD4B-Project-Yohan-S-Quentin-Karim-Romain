@@ -39,19 +39,20 @@ public class ProductController {
 
     }
 
-    private void OnBackMainClicked(ActionEvent event){
-        NavigationService.displayMainPage(window);
+    private void OnBackMainClicked(ActionEvent event){NavigationService.displayMainPage(window);}
 
-    }
-
-    private void OnAccesCartClicked(ActionEvent event){
-        NavigationService.displayCartPage(window);
-        System.out.println("test");
-
+    private void OnAccesCartClicked(ActionEvent event){NavigationService.displayCartPage(window);
     }
 
     private void OnActiveFilterClicked(ActionEvent event){
-        // todo filter !
+
+        view.setFirstPageNumber("1");
+
+        listOfProducts.AllAvailableProducts.remove(3);
+
+
+        view.refreshProductsContainer(listOfProducts);
+        view.createAllProductPanels(listOfProducts);
 
     }
 
@@ -70,7 +71,7 @@ public class ProductController {
 
             System.out.println(view.getFirstPageNumber());
 
-            view.refreshProductsContainer();
+            view.refreshProductsContainer(listOfProducts);
 
             view.displayErrorMessage(""); // erase an possible error message that happened before
 
@@ -98,7 +99,7 @@ public class ProductController {
 
             System.out.println(view.getFirstPageNumber());
 
-            view.refreshProductsContainer();
+            view.refreshProductsContainer(listOfProducts);
 
             view.displayErrorMessage(""); // erase an possible error message that happened before
 
