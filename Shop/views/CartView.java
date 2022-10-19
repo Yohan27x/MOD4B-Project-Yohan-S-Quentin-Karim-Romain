@@ -2,6 +2,7 @@ package Shop.views;
 
 import Shop.NavigationService;
 import Shop.controllers.CartProductPanelController;
+import Shop.controllers.ProductPanelController;
 import Shop.models.ListOfProducts;
 import Shop.utility.LayoutHelper;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CartView extends JPanel {
 
@@ -20,7 +22,11 @@ public class CartView extends JPanel {
     private final JLabel taxTotal;
     private final JLabel totalPrice;
     private final JScrollPane cartScrollPane;
+
+    private final JPanel productInCartContainer;
     private ListOfProducts listOfProducts = new ListOfProducts();
+
+    private ArrayList<JPanel> AllProductInCartPanels = new ArrayList<>();
     // todo ajouter scrollPane
     // todo créer component panel
 
@@ -40,18 +46,10 @@ public class CartView extends JPanel {
 
         add(createButtonUpPage());
 
-        CartProductPanel cartProductPanel1 = new CartProductPanel(listOfProducts.AllAvailableProducts.get(0));
-        CartProductPanel cartProductPanel2 = new CartProductPanel(listOfProducts.AllAvailableProducts.get(1));
-        new CartProductPanelController(cartProductPanel1);
-        new CartProductPanelController(cartProductPanel2);
 
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-        container.add(cartProductPanel1);
-        container.add(cartProductPanel2);
+        productInCartContainer = new JPanel();
 
-
-        cartScrollPane = new JScrollPane(container,   ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        cartScrollPane = new JScrollPane(productInCartContainer,   ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         cartScrollPane.setPreferredSize(new Dimension(350, 420));
 
         add(cartScrollPane);
@@ -61,13 +59,46 @@ public class CartView extends JPanel {
 
     }
 
-    private  JPanel createTitle(JLabel text) {
-        JPanel panel = new JPanel();
-        panel.setBorder(LayoutHelper.createEmptyBorder());
+    public void initialize(ListOfProducts listOfProducts){
 
-        panel.add(text);
+        this.createAllProductInCartPanels(listOfProducts);
+
+
+    }
+
+    public void createAllProductInCartPanels(ListOfProducts listOfProducts){
+
+        for (int i = 0; i < listOfProducts.AllAvailableProducts.size(); i++){
+
+            CartProductPanel cartProductPanel = new CartProductPanel(listOfProducts.AllAvailableProducts.get(i));
+            new CartProductPanelController(cartProductPanel);
+
+            AllProductInCartPanels.add(cartProductPanel);
+
+        }
+
+        productInCartContainer.add(createProductContainer());
+
+    }
+
+    private JPanel createProductContainer(){
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+
+        for(int i = 0; i < AllProductInCartPanels.size(); i++){
+            panel.add(AllProductInCartPanels.get(i));
+
+        }
 
         return panel;
+
+    }
+
+    public void ClearCart(){
+        productInCartContainer.removeAll();
+        AllProductInCartPanels.clear();
+
     }
 
 
