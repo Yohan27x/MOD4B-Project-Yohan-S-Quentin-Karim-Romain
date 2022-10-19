@@ -14,12 +14,13 @@ public class ListOfProducts {
         AllAvailableProducts.add(product1);
         Product product2 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "armor");
         AllAvailableProducts.add(product2);
-        Product product3 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
+        Product product3 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/d/de/CoalNew.png/revision/latest?cb=20190902204730", "food");
         AllAvailableProducts.add(product3);
-        Product product4 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
+        Product product4 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");
         AllAvailableProducts.add(product4);
-        Product product5 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "food");
-        AllAvailableProducts.add(product5);
+        Product product5 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");
+
+
 
 
     }
