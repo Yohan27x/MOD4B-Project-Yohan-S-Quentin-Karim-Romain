@@ -57,16 +57,11 @@ public class LoginController {
                 ResultSet resultSet = statement.executeQuery();
                 int rowsAffected = statement2.executeUpdate();
                 while(resultSet.next()){
-                    System.out.println("================================================================================================================");
-                    System.out.println(resultSet.getString("UserName"));
-                    System.out.println(resultSet.getString("Password"));
-                    System.out.println("================================================================================================================");
+                    if (rowsAffected > 0){
+                        return true;
+                    }
                 }
-                if (rowsAffected > 0){
-                    return true;
-                }else{
-                    return false;
-                }
+                return false;
                
                 
             } catch (SQLException e) {

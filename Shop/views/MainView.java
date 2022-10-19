@@ -29,9 +29,6 @@ public class MainView extends JPanel{
                 ResultSet resultSet = statement.executeQuery();
                 
                 while(resultSet.next()){
-                    System.out.println("================================================================================================================");
-                    System.out.println(resultSet.getString("UserName"));
-                    System.out.println("================================================================================================================");
                     return resultSet.getString("UserName");
                 }
                 
