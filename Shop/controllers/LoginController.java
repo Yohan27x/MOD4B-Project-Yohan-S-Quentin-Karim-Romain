@@ -3,6 +3,8 @@ package Shop.controllers;
 import Shop.NavigationService;
 import Shop.utility.Window;
 import Shop.views.LoginView;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
@@ -32,6 +34,10 @@ public class LoginController {
         String pass = new String(view.getPasswordText());
         if (testUser(userName, pass)){
             NavigationService.displayMainPage(window);
+        }
+        else {
+            System.out.println("bad userName or password");
+            view.setErreurMessage("bad userName or password");
         }
 
     }
