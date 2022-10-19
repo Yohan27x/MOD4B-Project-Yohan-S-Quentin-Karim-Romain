@@ -16,6 +16,8 @@ public class MainView extends JPanel{
     private final JButton pastOrderButton;
     private final JButton storeBalanceButton;
     private final JButton logOutButton;
+    private final JButton logInButton;
+    public int cpt = 0;
 
 
     final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
@@ -23,35 +25,33 @@ public class MainView extends JPanel{
     final static String password = "password";
     public String nameUser () {
         try (Connection connection = DriverManager.getConnection(url, username, password)){
+            String name = "USER";
                 String query = "SELECT UserName FROM userdb WHERE logged=? ";
                 PreparedStatement statement = connection.prepareStatement(query);
-                
                 statement.setBoolean(1, true);
-               
                 ResultSet resultSet = statement.executeQuery();
-                
                 while(resultSet.next()){
-                    return resultSet.getString("UserName");
+                    name = resultSet.getString("UserName");
                 }
-                
+                return name;
+
                 
                 
                 
             } catch (SQLException e) {
                 throw new IllegalStateException("Nique ?", e);
             }
-        return "Unknown";
         }
     public MainView(){
 
-
-        welcomeMessage = createValueLabel("Welcome " + nameUser());
+        welcomeMessage = new JLabel("");
 
         browseButton = new JButton("   BrowseProduct   ");
         pastOrderButton = new JButton("   ViewPastOrders   ");
         storeBalanceButton = new JButton("   AdjustBalance   ");
         cartButton = new JButton("   ViewCart   ");
         logOutButton = new JButton("   LogOut   ");
+        logInButton = new JButton("   LogIn   ");
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createLargeEmptyBorder());
@@ -59,14 +59,14 @@ public class MainView extends JPanel{
         add(createTitle(welcomeMessage));
         add(createBrowseButton());
         add(createViewOrderBalanceButton());
-        add(createLogoutButton());
+        add(createLogoutLoginButton());
 
 
     }
 
     public void initialize(Account account)
     {
-        welcomeMessage.setText("Welcome, " + nameUser() + "!");
+        welcomeMessage.setText("Welcome, " + nameUser() + " !");
     }
 
 
@@ -99,10 +99,15 @@ public class MainView extends JPanel{
         return panel;
 
     }
-    private JPanel createLogoutButton() {
+    private JPanel createLogoutLoginButton() {
         JPanel panel = new JPanel();
+        String test = nameUser();
         panel.setLayout(new GridLayout(1, 1, 3, 3));
-        panel.add(logOutButton);
+        if ( test.equals("USER")){
+            panel.add(logInButton);
+        }else{
+            panel.add(logOutButton);
+        }
         return panel;
 
     }
@@ -133,5 +138,8 @@ public class MainView extends JPanel{
 
     public void addLogOutListener(ActionListener listener){
         logOutButton.addActionListener(listener);
+    }
+    public void addLogInListener(ActionListener listener){
+        logInButton.addActionListener(listener);
     }
 }

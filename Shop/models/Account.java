@@ -19,6 +19,8 @@ public class Account {
     public ArrayList<String> nameUser () {
         try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
                 ArrayList<String> userData = new ArrayList<String>();
+                userData.add("USER");
+                userData.add("0");
                 String query = "SELECT UserName, Balance FROM userdb WHERE logged=true";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);

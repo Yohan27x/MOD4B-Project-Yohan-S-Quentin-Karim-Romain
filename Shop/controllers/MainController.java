@@ -31,7 +31,7 @@ public class MainController {
         view.addCartListener(this::onViewCartClicked);
         view.addPastOrdersListener(this::onPastOrderClicked);
         view.addLogOutListener(this::onLogOutClicked);
-
+        view.addLogInListener(this::onLogInClicked);
     }
 
     private void onBrowseClicked(ActionEvent event){
@@ -53,6 +53,12 @@ public class MainController {
 
     private void onLogOutClicked(ActionEvent event){
         if (logOut()){
+            NavigationService.displayLogInPage(window);
+        }
+    }
+
+    private void onLogInClicked(ActionEvent event){
+        if (!logOut()){
             NavigationService.displayLogInPage(window);
         }
     }
