@@ -35,6 +35,7 @@ public class CartProductPanelController {
         //mainView.getListOfProducts().FillUserCart(); // remplir de nouveau la liste avec la db qui est maintenant actualisé
         mainView.createAllProductInCartPanels(mainView.getListOfProducts());
 
+
     }
     private void OnIncreaseQuantityClicked(ActionEvent event) {
 
@@ -51,9 +52,14 @@ public class CartProductPanelController {
 
             // todo augmenter la quantité dnas la bdd
 
-            mainView.setShippingFeeLabel(20.00);  //todo ensuite set dans le main view les label de prix en récupérant dans la bdd,
-            // mainView.settotalprice("sdfds");
-            // ...
+            //todo ensuite set dans le main view les label de prix en récupérant dans la bdd les données
+
+            mainView.setSubTotalLabel(20.00);
+            mainView.setTaxesLabel(20.00);
+            mainView.setShippingFeeLabel(20.00);
+            mainView.setTotalPricelabel(20.00);
+
+            //
 
         }
         else{
@@ -76,9 +82,10 @@ public class CartProductPanelController {
 
             // todo baisser la quantité dnas la bdd
 
-            mainView.setTaxesLabel(40.15442);  // todo ensuite set dans le main view les label de prix en récupérant dans la bdd,
-            // mainView.settotalprice("sdfds");
-            // ...
+            mainView.setSubTotalLabel(20.00);  //todo ensuite set dans le main view les label de prix en récupérant dans la bdd,1
+            mainView.setTaxesLabel(20.00);
+            mainView.setShippingFeeLabel(20.00);
+            mainView.setTotalPricelabel(20.00);
 
         }
 

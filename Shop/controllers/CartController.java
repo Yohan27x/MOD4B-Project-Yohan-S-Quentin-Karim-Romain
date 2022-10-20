@@ -44,7 +44,7 @@ public class CartController {
     private void OnClearCartClicked(ActionEvent event)
     {
 
-        // clear le cart dans la db et dans le view view.ClearCart();
+        // clear le cart dans la db avec le user true et dans le view view.ClearCart();
         System.out.println("cart clear");
         view.ClearCart();
 
@@ -60,7 +60,7 @@ public class CartController {
         // supprimer les produits du panier dnas la db et dans le view //view.ClearCart();
 
 
-        view.createAllProductInCartPanels(listOfProducts);
+        //view.createAllProductInCartPanels(listOfProducts);
 
         view.displayErrorMessage(true, "ok checkout!"); // bleue ok
         //view.displayErrorMessage(false, "probleme !"); // rouge erreur
