@@ -40,7 +40,12 @@ public class ProductController {
 
     private void OnBackMainClicked(ActionEvent event){NavigationService.displayMainPage(window);}
 
-    private void OnAccesCartClicked(ActionEvent event){NavigationService.displayCartPage(window);
+    private void OnAccesCartClicked(ActionEvent event) {
+        if (MainController.logOut() == false) {
+            view.displayErrorMessage("You need to be connected to acces your cart !");
+        } else {
+            NavigationService.displayCartPage(window);
+        }
     }
 
     private void OnActiveFilterClicked(ActionEvent event){
