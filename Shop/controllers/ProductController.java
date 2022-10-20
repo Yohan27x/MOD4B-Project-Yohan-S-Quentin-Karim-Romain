@@ -2,6 +2,7 @@ package Shop.controllers;
 
 
 import java.awt.event.ActionEvent;
+import java.sql.SQLOutput;
 import java.text.NumberFormat;
 
 import Shop.utility.Window;
@@ -44,13 +45,14 @@ public class ProductController {
 
     private void OnActiveFilterClicked(ActionEvent event){
 
-        view.setFirstPageNumber("1");
+        System.out.println("active filter");
+        ///view.setFirstPageNumber("1");
 
         // récupérer les filtres choisis dans le view
-        // récupérer les produits dans la db qui correspond a ce filtre
+        // récupérer les produits dans la db qui correspond aux filtre
         // mettre à jour la liste des produits en retirant / ajoutant les produits corresopndant aux critères
 
-
+        /*
         listOfProducts.AllAvailableProducts.remove(0);
         listOfProducts.AllAvailableProducts.remove(1);
         listOfProducts.AllAvailableProducts.remove(1);
@@ -59,6 +61,8 @@ public class ProductController {
 
         view.createAllProductPanels(listOfProducts);
         view.refreshProductsContainer(listOfProducts);
+
+         */
 
 
     }

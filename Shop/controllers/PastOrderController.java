@@ -15,6 +15,7 @@ public class PastOrderController {
     private final PastOrderView view;
     private final Window window;
 
+
     private final NumberFormat currencyFormatter;
 
     private ArrayList<Double> allPricePastOrders = new ArrayList<>();
@@ -22,20 +23,20 @@ public class PastOrderController {
     public PastOrderController(PastOrderView view, Window window)
     {
 
-        // ajouter les prix des orders du true account avec sql
-        allPricePastOrders.add(10.00);
-        allPricePastOrders.add(20.00);
-        allPricePastOrders.add(30.00);
+
 
         this.view = view;
         this.window = window;
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
+        // todo ICIII ajouter a la liste les orders de la db correspondant au user true
+        allPricePastOrders.add(10.00);
+        allPricePastOrders.add(20.00);
+        allPricePastOrders.add(30.00);
+
         this.view.initialize(allPricePastOrders);
 
-        //window.getRootPane().setDefaultButton(view.getDefaultButton());
-        //view.focusUsername();
 
         view.addBackMainListener(this::onBackMainClicked);
 

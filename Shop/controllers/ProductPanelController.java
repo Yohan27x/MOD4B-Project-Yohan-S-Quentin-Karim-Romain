@@ -2,6 +2,7 @@ package Shop.controllers;
 
 import Shop.formatting.CurrencyHelper;
 import Shop.views.ProductPanel;
+import com.sun.tools.javac.Main;
 
 import java.awt.event.ActionEvent;
 import java.lang.Thread.State;
@@ -30,6 +31,12 @@ public class ProductPanelController {
     }
 
     private void OnAddToCartClicked(ActionEvent event){
+
+        if(MainController.logOut() == false){
+            view.displayErrorMessage("You must be connected to add " +
+                    "product to your cart !");
+        }
+        else {
         int sku = Integer.parseInt(view.getProductSKU());
         String User = "test";
         int SKU = 0;
@@ -73,18 +80,9 @@ public class ProductPanelController {
                 statement3.setInt(8,  resultSet2.getInt("Quantity"));
                 statement3.setInt(9, quant);
             }
-
-            int rowsAffected = statement3.executeUpdate();
-            if (rowsAffected == 0){
-                System.out.println("Can't add the product");
-            }
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("ça va être chaud mmm?", e);
         }
-
-
     }
+
 
     private void OnIncreaseQuantityClicked(ActionEvent event) {
 

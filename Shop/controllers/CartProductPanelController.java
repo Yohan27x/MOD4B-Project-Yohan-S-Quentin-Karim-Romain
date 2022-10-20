@@ -30,14 +30,18 @@ public class CartProductPanelController {
     private void OnRemoveOfCartClicked(ActionEvent event){
         System.out.println("retirer du panier " + productPanelView.getProductName());
         // tous remove du container, retirer de la db cart l'élement, recréer les panels et refill le container
+        // clear le swing
         mainView.ClearCart();
-        // retirer de la db l'élement avec productPanelView.getProductSKU()
-        //mainView.getListOfProducts().FillUserCart(); // remplir de nouveau la liste avec la db qui est maintenant actualisé
+        // retirer de la db l'élement en le récupérant avec productPanelView.getProductSKU()
+        // remplir de nouveau la liste avec la db qui est maintenant actualisé
+        //mainView.getListOfProducts().FillUserCart();
+       // créer de nouveau les panels
         mainView.createAllProductInCartPanels(mainView.getListOfProducts());
 
 
     }
     private void OnIncreaseQuantityClicked(ActionEvent event) {
+
 
         int productQuantityChoosenInt = Integer.parseInt(productPanelView.getProductQuantityChoosen());
         int productQuantityLeftInt = Integer.parseInt(productPanelView.getProductQuantityLeft());
@@ -53,7 +57,6 @@ public class CartProductPanelController {
             // todo augmenter la quantité dnas la bdd
 
             //todo ensuite set dans le main view les label de prix en récupérant dans la bdd les données
-
 
             double subTotal = 0;
             double taxes = 0 ;
