@@ -26,8 +26,8 @@ public class Account {
                 ResultSet resultSet = statement.executeQuery(query);
                 
                 while(resultSet.next()){
-                    userData.add(resultSet.getString("UserName"));
-                    userData.add(resultSet.getString("Balance"));
+                    userData.set(0,resultSet.getString("UserName"));
+                    userData.set(1, resultSet.getString("Balance"));
                 }
                 
                 return userData;
