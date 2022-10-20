@@ -44,10 +44,17 @@ public class MainController {
 
 
     private void onViewCartClicked(ActionEvent event){
+        // check si connecté
+        // view.displayErrorMessage("")
+        // else
         NavigationService.displayCartPage(window);
+
     }
 
     private void onPastOrderClicked(ActionEvent event){
+        // check si connecté
+        // view.displayErrorMessage("")
+        // else
         NavigationService.displayPastOrdersPage(window);
     }
 

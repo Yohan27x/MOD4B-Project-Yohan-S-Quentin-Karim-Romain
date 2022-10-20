@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 
 public class CartController {
 
-    private final ListOfProducts listOfProducts = new ListOfProducts();
+    private final ListOfProducts listOfProducts;
     private final CartView view;
     private final Window window;
 
@@ -26,8 +26,8 @@ public class CartController {
         this.window = window;
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
-
-        //listOfProducts.FillUserCart();
+        listOfProducts = new ListOfProducts();
+        listOfProducts.fillShopAvailableProduct(); // todo remplacer par filluserCart
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::onBackMainClicked);

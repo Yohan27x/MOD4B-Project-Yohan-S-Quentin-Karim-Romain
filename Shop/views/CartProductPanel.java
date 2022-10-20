@@ -50,7 +50,6 @@ public class CartProductPanel extends JPanel {
         ProductImage = new JLabel();
 
 
-
         //ImageIcon icon = new ImageIcon(new ImageIcon(product.getImagePath()).getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT));
         //ProductImage.setIcon(icon);
         ProductName = new JLabel(product.getName());

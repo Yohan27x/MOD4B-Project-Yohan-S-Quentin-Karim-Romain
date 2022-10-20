@@ -13,7 +13,7 @@ import Shop.views.ProductView;
 
 public class ProductController {
 
-    private final ListOfProducts listOfProducts = new ListOfProducts();
+    private final ListOfProducts listOfProducts;
     private final ProductView view;
     private final Window window;
     private final NumberFormat currencyFormatter;
@@ -23,7 +23,9 @@ public class ProductController {
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
-        //listOfProducts.FillShopAvailableProduct();
+        listOfProducts = new ListOfProducts();
+        listOfProducts.fillShopAvailableProduct();
+
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::OnBackMainClicked);

@@ -119,11 +119,9 @@ public class ProductView extends JPanel {
     public void createAllProductPanels(ListOfProducts listOfProducts){
 
 
-        System.out.println("create againt all panels");
         numOfProducts = listOfProducts.AllAvailableProducts.size();
 
         for (int i = 0; i < listOfProducts.AllAvailableProducts.size(); i++){
-
 
             ProductPanel productPanel = new ProductPanel(listOfProducts.AllAvailableProducts.get(i));
             new ProductPanelController(productPanel);

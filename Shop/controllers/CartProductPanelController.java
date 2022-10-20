@@ -54,10 +54,16 @@ public class CartProductPanelController {
 
             //todo ensuite set dans le main view les label de prix en récupérant dans la bdd les données
 
-            mainView.setSubTotalLabel(20.00);
-            mainView.setTaxesLabel(20.00);
-            mainView.setShippingFeeLabel(20.00);
-            mainView.setTotalPricelabel(20.00);
+
+            double subTotal = 0;
+            double taxes = 0 ;
+            double shippingFee = 0;
+            double sotalPrice = 0;
+
+            mainView.setSubTotalLabel(subTotal);
+            mainView.setTaxesLabel(taxes);
+            mainView.setShippingFeeLabel(shippingFee);
+            mainView.setTotalPricelabel(sotalPrice);
 
             //
 

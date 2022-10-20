@@ -12,6 +12,7 @@ public class LoginView extends JPanel
     private final JPasswordField passwordTextField;
     private final JButton loginButton;
     private final JButton registerButton;
+    private final JButton accesMainPage;
     private final JLabel ErreurMessage;
 
 
@@ -23,6 +24,7 @@ public class LoginView extends JPanel
         passwordTextField = new JPasswordField();
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
+        accesMainPage =  new JButton("AccesMainPage");
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(LayoutHelper.createLargeEmptyBorder());
@@ -33,10 +35,11 @@ public class LoginView extends JPanel
         add(createUserPanel());
         add(LayoutHelper.createRigidArea());
         add(createButtonsPanel());
+        add(createAccesMainPagePanel());
 
     }
 
-    private static JLabel createValueLabel(String text)
+    private JLabel createValueLabel(String text)
     {
         JLabel label = new JLabel(text);
         Font font = label.getFont();
@@ -44,7 +47,16 @@ public class LoginView extends JPanel
         return label;
     }
 
-    private static JPanel createTitle(JLabel text)
+    private JPanel createAccesMainPagePanel()
+    {
+        JPanel panel = new JPanel();
+        panel.setBorder(LayoutHelper.createEmptyBorder());
+        panel.add(accesMainPage);
+
+        return panel;
+    }
+
+    private JPanel createTitle(JLabel text)
     {
         JPanel panel = new JPanel();
         panel.add(text);
@@ -90,8 +102,6 @@ public class LoginView extends JPanel
         return passwordTextField.getPassword();
     }
 
-
-
     public void addLoginListener(ActionListener listener)
     {
         loginButton.addActionListener(listener);
@@ -110,6 +120,11 @@ public class LoginView extends JPanel
     public void removeRegisterListener(ActionListener listener)
     {
         registerButton.removeActionListener(listener);
+    }
+
+    public void addAccesMainListener(ActionListener listener)
+    {
+        accesMainPage.addActionListener(listener);
     }
 
 

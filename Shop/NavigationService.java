@@ -1,12 +1,6 @@
 package Shop;
 import Shop.views.*;
-import Shop.controllers.AccountBalanceController;
-import Shop.controllers.CartController;
-import Shop.controllers.LoginController;
-import Shop.controllers.MainController;
-import Shop.controllers.PastOrderController;
-import Shop.controllers.ProductController;
-import Shop.controllers.RegisterController;
+import Shop.controllers.*;
 import Shop.models.Account;
 import Shop.utility.Window;
 

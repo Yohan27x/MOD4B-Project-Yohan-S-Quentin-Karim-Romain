@@ -19,12 +19,17 @@ public class LoginController {
         this.view = view;
         this.window = window;
 
-        //window.getRootPane().setDefaultButton(view.getDefaultButton());
-        //view.focusUsername();
 
         view.addLoginListener(this::onLoginClicked);
         view.addRegisterListener(this::onRegisterClicked);
+        view.addAccesMainListener(this::onAccesMainlicked);
         
+    }
+
+    private void onAccesMainlicked(ActionEvent event)
+    {
+        NavigationService.displayMainPage(window);
+
     }
 
     private void onLoginClicked(ActionEvent event)

@@ -11,14 +11,14 @@ import java.sql.*;
 public class MainView extends JPanel{
     private String userName;
     private final JLabel welcomeMessage;
+
+    private final JLabel errorMessage;
     private final JButton browseButton;
     private final JButton cartButton;
     private final JButton pastOrderButton;
     private final JButton storeBalanceButton;
     private final JButton logOutButton;
     private final JButton logInButton;
-    public int cpt = 0;
-
 
     final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
     final static String username = "java";
@@ -46,6 +46,8 @@ public class MainView extends JPanel{
 
         welcomeMessage = new JLabel("");
 
+        errorMessage = createErrorLabel("");
+
         browseButton = new JButton("   BrowseProduct   ");
         pastOrderButton = new JButton("   ViewPastOrders   ");
         storeBalanceButton = new JButton("   AdjustBalance   ");
@@ -57,6 +59,7 @@ public class MainView extends JPanel{
         setBorder(LayoutHelper.createLargeEmptyBorder());
 
         add(createTitle(welcomeMessage));
+        add(createErrorMessagePanel());
         add(createBrowseButton());
         add(createViewOrderBalanceButton());
         add(createLogoutLoginButton());
@@ -110,6 +113,29 @@ public class MainView extends JPanel{
         }
         return panel;
 
+    }
+
+    private static JLabel createErrorLabel(String text)
+    {
+        JLabel label = new JLabel(text);
+        Font font = label.getFont();
+        label.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
+        label.setForeground(Color.RED);
+        return label;
+    }
+
+    private JPanel createErrorMessagePanel()
+    {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+        panel.add(errorMessage);
+        return panel;
+    }
+
+    public void displayErrorMessage(String message)
+    {
+        errorMessage.setText(message);
     }
 
     private static JLabel createValueLabel(String text)

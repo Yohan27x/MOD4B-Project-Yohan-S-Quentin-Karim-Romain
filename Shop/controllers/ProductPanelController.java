@@ -31,7 +31,7 @@ public class ProductPanelController {
 
     private void OnAddToCartClicked(ActionEvent event){
         int sku = Integer.parseInt(view.getProductSKU());
-        String User = "merde";
+        String User = "test";
         try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
             String query = "SELECT UserName, logged FROM shop.userdb WHERE logged=true";
             String query2 = "SELECT * FROM shop.product WHERE SKU=?";

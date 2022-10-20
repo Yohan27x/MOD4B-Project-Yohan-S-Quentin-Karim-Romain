@@ -22,7 +22,6 @@ public class ProductPanel extends JPanel {
     private final JLabel ProductImage;
     private final JLabel ProductPrice;
     private final JLabel ProductDescription;
-
     private final JLabel ProductSKU;
     private final JLabel ProductCategory;
     private final JLabel ProductQuantityLeft;
@@ -54,8 +53,6 @@ public class ProductPanel extends JPanel {
 
 
 
-        //ImageIcon icon = new ImageIcon(new ImageIcon(product.getImagePath()).getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT));
-        //ProductImage.setIcon(icon);
         ProductName = new JLabel(product.getName());
         ProductPrice = new JLabel(product.getStringPrice());
         ProductDescription = new JLabel(product.getDescription());
@@ -199,9 +196,7 @@ public class ProductPanel extends JPanel {
         return ProductSKU.getText();
     }
 
-    public void setProductQuantityChoosen(String newQuantityChoosen){
-        ProductQuantityChoosen.setText(newQuantityChoosen);
-    }
+    public void setProductQuantityChoosen(String newQuantityChoosen){ProductQuantityChoosen.setText(newQuantityChoosen);}
 
     public void setProductQuantityLeft(String newQuantityLeft){
         ProductQuantityLeft.setText(newQuantityLeft);
