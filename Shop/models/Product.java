@@ -14,11 +14,17 @@ public class Product {
     private int SKU;
     private int soldedQuantity;
 
-    public Product(String name, double price, String path, String category){
+    public Product(int SKU, String name, double price, String path, String category, int quantity, String description){
+
         this.name = name;
         this.price = price;
-        this.quantity = 10;
+        this.quantity = quantity;
         this.category = category;
+        this.description = description;
+        this.SKU = SKU;
+
+        //ImagePath = path;
+
         this.description = "A very simple product!";
         this.imagePath = path;
 
