@@ -10,25 +10,31 @@ public class Product {
     private int quantity;
     private String category;
     private String description;
-    private String ImagePath;
+    private String imagePath;
     private int SKU;
-
-    private boolean inStock;
-
     private int soldedQuantity;
 
-    public Product(String name, int price, String path, String category){
+    public Product(String name, double price, String path, String category){
         this.name = name;
         this.price = price;
         this.quantity = 10;
         this.category = category;
         this.description = "A very simple product!";
-
-
-        ImagePath = path;
-
+        this.imagePath = path;
 
     }
+    public Product(String name, double price, int quantity, String path, String category, String description, int SKU, int soldedQuantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.imagePath = path;
+        this.category = category;
+        this.description = description;
+        this.SKU = SKU;
+        this.soldedQuantity = soldedQuantity;
+
+    }
+
     public String getName(){
         return name;
     }
@@ -38,10 +44,10 @@ public class Product {
     }
 
     public String getStringPrice(){
-        return price+"$";
+        return price+"";
     }
     public String getImagePath(){
-        return ImagePath;
+        return imagePath;
     }
 
     public String getDescription(){

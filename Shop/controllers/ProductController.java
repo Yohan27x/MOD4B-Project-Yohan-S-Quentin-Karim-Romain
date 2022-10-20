@@ -3,8 +3,6 @@ package Shop.controllers;
 
 import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
-import java.util.Objects;
-import java.util.Random;
 
 import Shop.utility.Window;
 import Shop.NavigationService;
@@ -25,15 +23,12 @@ public class ProductController {
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
-        listOfProducts.FillUShopAvailableProduct();
+        listOfProducts.FillShopAvailableProduct();
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::OnBackMainClicked);
-
         view.addActiveFilterListener(this::OnActiveFilterClicked);
-
-        view.addCartListener(this::OnAccesCartClicked);
-
+        view.addAccesCartListener(this::OnAccesCartClicked);
         view.addNextPageListener(this::OnNextPageClicked);
         view.addPreviousPageListener(this::OnPreviousPageClicked);
 
@@ -49,10 +44,20 @@ public class ProductController {
 
         view.setFirstPageNumber("1");
 
+        // récupérer les filtres choisis dans le view
+        // récupérer les produits dans la db qui correspond a ce filtre
+        // mettre à jour la liste des produits en retirant / ajoutant les produits corresopndant aux critères
+
+
+        listOfProducts.AllAvailableProducts.remove(0);
+        listOfProducts.AllAvailableProducts.remove(1);
+        listOfProducts.AllAvailableProducts.remove(1);
         listOfProducts.AllAvailableProducts.remove(0);
 
-        view.refreshProductsContainer(listOfProducts);
+
         view.createAllProductPanels(listOfProducts);
+        view.refreshProductsContainer(listOfProducts);
+
 
     }
 
@@ -75,9 +80,12 @@ public class ProductController {
 
             view.displayErrorMessage(""); // erase an possible error message that happened before
 
+
+
         }
         else{
             view.displayErrorMessage("You are at the last page, there are no more products to see");
+
         }
 
 

@@ -1,5 +1,6 @@
 package Shop.views;
 
+import Shop.formatting.CurrencyHelper;
 import Shop.models.Product;
 
 import javax.imageio.ImageIO;
@@ -10,11 +11,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.text.NumberFormat;
 
 public class CartProductPanel extends JPanel {
 
+    private final NumberFormat currencyFormatter;
     private final JLabel errorMessage;
-
     private final JButton removeOfCart;
     private final JLabel ProductName;
     private final JLabel ProductImage;
@@ -31,6 +33,8 @@ public class CartProductPanel extends JPanel {
 
 
     public CartProductPanel(Product product){
+
+        currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
         Border raisedetched;
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
@@ -98,7 +102,8 @@ public class CartProductPanel extends JPanel {
 
         c.gridx = 1;
         c.gridy = 5;
-        add(ProductPrice, c);
+        JLabel priceWithSymbol = new JLabel(ProductPrice.getText() + "$");
+        add(priceWithSymbol, c);
 
         c.gridx = 0;
         c.gridy = 6;
@@ -118,6 +123,7 @@ public class CartProductPanel extends JPanel {
 
         c.gridx = 4;
         c.gridy = 1;
+
         add(ProductQuantityLeft, c);
 
         c.gridx = 1;
@@ -172,8 +178,22 @@ public class CartProductPanel extends JPanel {
         return ProductName.getText();
     }
 
-    public String getProductPrice(){
-        return ProductPrice.getText();
+    public Double getProductPrice(){
+        double productPrice = Double.parseDouble(ProductQuantityChoosen.getText()) * Double.parseDouble(ProductPrice.getText());
+        return productPrice;
+    }
+
+    public Double getProductTaxes(){
+        double productPrice = this.getProductPrice();
+        double taxeGST = productPrice * 0.05;
+        double taxeQST = productPrice * 0.0975;
+        double fullTaxes = taxeGST + taxeQST;
+
+        if(ProductCategory.getText().equals("foods")){
+            fullTaxes = 0;
+        }
+
+        return fullTaxes ;
     }
 
     public String getProductQuantityLeft(){

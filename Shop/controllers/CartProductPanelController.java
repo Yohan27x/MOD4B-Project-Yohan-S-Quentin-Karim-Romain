@@ -1,43 +1,63 @@
 package Shop.controllers;
 
+import Shop.formatting.CurrencyHelper;
 import Shop.views.CartProductPanel;
+import Shop.views.CartView;
 import Shop.views.ProductPanel;
 
 import java.awt.event.ActionEvent;
+import java.text.NumberFormat;
 
 public class CartProductPanelController {
 
-    private final CartProductPanel view;
+    private final CartProductPanel productPanelView;
+    private final CartView mainView;
+    private final NumberFormat currencyFormatter;
 
-    public CartProductPanelController(CartProductPanel view){
 
-        this.view = view;
+    public CartProductPanelController(CartProductPanel view, CartView mainView){
 
-        view.addRemoveOfCartListener(this::OnRemoveOfCartClicked);
-        view.addIncreaseQuantityListener(this::OnIncreaseQuantityClicked);
-        view.addDecreaseQuantityListener(this::OnDecreaseQuantityClicked);
+        this.productPanelView = view;
+        this.mainView = mainView;
+
+        currencyFormatter = CurrencyHelper.getCurrencyFormatter();
+
+        productPanelView.addRemoveOfCartListener(this::OnRemoveOfCartClicked);
+        productPanelView.addIncreaseQuantityListener(this::OnIncreaseQuantityClicked);
+        productPanelView.addDecreaseQuantityListener(this::OnDecreaseQuantityClicked);
     }
 
     private void OnRemoveOfCartClicked(ActionEvent event){
-        System.out.println("retirer du panier " + view.getProductName());
+        System.out.println("retirer du panier " + productPanelView.getProductName());
+        // tous remove du container, retirer de la db cart l'élement, recréer les panels et refill le container
+        mainView.ClearCart();
+        // retirer de la db l'élement avec productPanelView.getProductSKU()
+        //mainView.getListOfProducts().FillUserCart(); // remplir de nouveau la liste avec la db qui est maintenant actualisé
+        mainView.createAllProductInCartPanels(mainView.getListOfProducts());
 
     }
     private void OnIncreaseQuantityClicked(ActionEvent event) {
 
-        int productQuantityChoosenInt = Integer.parseInt(view.getProductQuantityChoosen());
-        int productQuantityLeftInt = Integer.parseInt(view.getProductQuantityLeft());
+        int productQuantityChoosenInt = Integer.parseInt(productPanelView.getProductQuantityChoosen());
+        int productQuantityLeftInt = Integer.parseInt(productPanelView.getProductQuantityLeft());
 
         if(productQuantityChoosenInt < productQuantityLeftInt){
-            String quantityChoosenStr = view.getProductQuantityChoosen();
+            String quantityChoosenStr = productPanelView.getProductQuantityChoosen();
             int quantityChoosenInt = Integer.parseInt(quantityChoosenStr);
             ++quantityChoosenInt;
 
-            view.setProductQuantityChoosen(quantityChoosenInt + "");
-            view.displayErrorMessage("");
+            productPanelView.setProductQuantityChoosen(quantityChoosenInt + "");
+            productPanelView.displayErrorMessage("");
+
+            // todo augmenter la quantité dnas la bdd
+
+            mainView.setShippingFeeLabel(20.00);  //todo ensuite set dans le main view les label de prix en récupérant dans la bdd,
+            // mainView.settotalprice("sdfds");
+            // ...
 
         }
         else{
-            view.displayErrorMessage("cannot Increase more !");
+            productPanelView.displayErrorMessage("cannot Increase more !");
 
         }
 
@@ -45,19 +65,25 @@ public class CartProductPanelController {
 
     private void OnDecreaseQuantityClicked(ActionEvent event) {
 
-        int productQuantityChoosenInt = Integer.parseInt(view.getProductQuantityChoosen());
+        int productQuantityChoosenInt = Integer.parseInt(productPanelView.getProductQuantityChoosen());
 
         if(productQuantityChoosenInt > 1){
-            int quantityChoosenInt = Integer.parseInt(view.getProductQuantityChoosen());
+            int quantityChoosenInt = Integer.parseInt(productPanelView.getProductQuantityChoosen());
             --quantityChoosenInt;
 
-            view.setProductQuantityChoosen(quantityChoosenInt + "");
-            view.displayErrorMessage("");
+            productPanelView.setProductQuantityChoosen(quantityChoosenInt + "");
+            productPanelView.displayErrorMessage("");
+
+            // todo baisser la quantité dnas la bdd
+
+            mainView.setTaxesLabel(40.15442);  // todo ensuite set dans le main view les label de prix en récupérant dans la bdd,
+            // mainView.settotalprice("sdfds");
+            // ...
 
         }
 
         else{
-            view.displayErrorMessage("cannot decrease more !");
+            productPanelView.displayErrorMessage("cannot decrease more !");
         }
     }
 }
