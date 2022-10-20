@@ -27,7 +27,7 @@ public class CartController {
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
-        listOfProducts.FillUserCart();
+        //listOfProducts.FillUserCart();
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::onBackMainClicked);

@@ -23,7 +23,7 @@ public class ProductController {
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
-        listOfProducts.FillShopAvailableProduct();
+        //listOfProducts.FillShopAvailableProduct();
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::OnBackMainClicked);

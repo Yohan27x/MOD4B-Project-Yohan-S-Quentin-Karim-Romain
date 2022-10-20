@@ -16,9 +16,8 @@ public class ListOfProducts {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query); 
             while(resultSet.next()){
-                //int SKU = Integer.parseInt(resultSet.getString("SKU"));
                 System.out.println(Integer.parseInt(resultSet.getString("SKU")));
-                AllAvailableProducts.add(new Product(Integer.parseInt(resultSet.getString("SKU")), resultSet.getString("prodName"), Integer.parseInt(resultSet.getString("Price")), resultSet.getString("prodPath"), resultSet.getString("Cartegory"), Integer.parseInt(resultSet.getString("Quantity")), resultSet.getString("prodDescription")));
+                AllAvailableProducts.add(new Product(Integer.parseInt(resultSet.getString("SKU")), resultSet.getString("prodName"), Double.parseDouble(resultSet.getString("Price")), resultSet.getString("prodPath"), resultSet.getString("Cartegory"), Integer.parseInt(resultSet.getString("Quantity")), resultSet.getString("prodDescription")));
             }            
             
         } catch (SQLException e) {
@@ -43,7 +42,7 @@ public class ListOfProducts {
 
         Product product5 = new Product("Watermelon", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");
         AllAvailableProducts.add(product5);
-        */
+        
 
 
 
@@ -60,8 +59,7 @@ public class ListOfProducts {
         Product product4 = new Product("Diamond", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");
         AllAvailableProducts.add(product4);
         Product product5 = new Product("Diamond", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");
-
+        */
     }
-
 
 }
