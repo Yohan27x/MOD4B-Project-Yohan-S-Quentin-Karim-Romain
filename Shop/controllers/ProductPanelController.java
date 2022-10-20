@@ -24,7 +24,9 @@ public class ProductPanelController {
     }
 
     private void OnAddToCartClicked(ActionEvent event){
-        System.out.println("name : " + view.getProductName());
+
+        // donner ce sku a la db qui trouve le produit et l'ajoute au cart
+        int sku = Integer.parseInt(view.getProductSKU());
 
     }
 
