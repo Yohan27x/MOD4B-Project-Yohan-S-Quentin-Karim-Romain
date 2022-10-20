@@ -25,6 +25,7 @@ public class ProductController {
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
+        listOfProducts.FillUShopAvailableProduct();
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::OnBackMainClicked);
@@ -48,8 +49,7 @@ public class ProductController {
 
         view.setFirstPageNumber("1");
 
-        listOfProducts.AllAvailableProducts.remove(3);
-
+        listOfProducts.AllAvailableProducts.remove(0);
 
         view.refreshProductsContainer(listOfProducts);
         view.createAllProductPanels(listOfProducts);

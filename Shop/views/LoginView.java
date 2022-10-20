@@ -12,11 +12,13 @@ public class LoginView extends JPanel
     private final JPasswordField passwordTextField;
     private final JButton loginButton;
     private final JButton registerButton;
+    private final JLabel ErreurMessage;
 
 
     public LoginView()
     {
         appName = createValueLabel("Welcome to e-Shop!");
+        ErreurMessage = createValueLabel("");
         loginTextField = new JTextField();
         passwordTextField = new JPasswordField();
         loginButton = new JButton("Login");
@@ -26,6 +28,7 @@ public class LoginView extends JPanel
         setBorder(LayoutHelper.createLargeEmptyBorder());
 
         add(createTitle(appName));
+        add(createTitle(ErreurMessage));
         add(LayoutHelper.createLargeRigidArea());
         add(createUserPanel());
         add(LayoutHelper.createRigidArea());
@@ -74,6 +77,8 @@ public class LoginView extends JPanel
         return panel;
     }
 
+    public void setErreurMessage(String message){ ErreurMessage.setText(message);}
+
 
     public String getLoginText()
     {
@@ -108,4 +113,7 @@ public class LoginView extends JPanel
     }
 
 
+    /*public char[] add(String bad_userName_or_password) {
+        return new char[0];
+    }*/
 }
