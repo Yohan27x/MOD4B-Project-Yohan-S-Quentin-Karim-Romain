@@ -56,7 +56,7 @@ public class CartProductPanel extends JPanel {
         ProductPrice = new JLabel(product.getStringPrice());
         ProductDescription = new JLabel(product.getDescription());
         ProductQuantityLeft = new JLabel(product.getStringQuantity());
-        ProductQuantityChoosen = new JLabel("1");
+        ProductQuantityChoosen = new JLabel(product.getStringQuantityChoosen());
         ProductCategory = new JLabel(product.getCategory());
         ProductSKU = new JLabel(product.getStringSku());
 

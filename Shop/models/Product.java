@@ -12,7 +12,7 @@ public class Product {
     private String description;
     private String imagePath;
     private int SKU;
-    private int soldedQuantity;
+    private int quantityChoosen = 1;
 
     public Product(int SKU, String name, double price, String path, String category, int quantity, String description){
 
@@ -29,7 +29,7 @@ public class Product {
         this.imagePath = path;
 
     }
-    public Product(String name, double price, int quantity, String path, String category, String description, int SKU, int soldedQuantity) {
+    public Product(int SKU, String name, double price, String path, String category, int quantity, String description, int quantityChoosen) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -37,7 +37,7 @@ public class Product {
         this.category = category;
         this.description = description;
         this.SKU = SKU;
-        this.soldedQuantity = soldedQuantity;
+        this.quantityChoosen = quantityChoosen;
 
     }
 
@@ -72,6 +72,8 @@ public class Product {
         return category;
     }
 
-
+    public String getStringQuantityChoosen(){
+        return quantityChoosen + "";
+    }
 
 }

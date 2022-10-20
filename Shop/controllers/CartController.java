@@ -27,7 +27,7 @@ public class CartController {
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
         listOfProducts = new ListOfProducts();
-        listOfProducts.fillShopAvailableProduct(); // todo remplacer par filluserCart
+        listOfProducts.FillUserCart(); // todo remplacer par filluserCart
         view.initialize(this.listOfProducts);
 
         view.addBackMainListener(this::onBackMainClicked);
