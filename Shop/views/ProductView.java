@@ -214,6 +214,7 @@ public class ProductView extends JPanel {
     private void RefreshNumOfPageAndProduct(ListOfProducts listOfProducts){
 
         numOfProducts = listOfProducts.AllAvailableProducts.size();
+        System.out.println("numOfProducts : " + numOfProducts);
 
         int numOfAvailableProduct = numOfProducts;
         if(numOfAvailableProduct % 2 == 0){
@@ -223,6 +224,12 @@ public class ProductView extends JPanel {
         else{ // if odd number of available product
             maxPageNumber = ((numOfAvailableProduct)/productPerPage + 1);
         }
+
+        if(numOfProducts == 0){
+            maxPageNumber = 1;
+        }
+
+        System.out.println("maxPageNumber : " + maxPageNumber);
 
         lastPageNumber.setText(maxPageNumber + "");
 
@@ -273,7 +280,7 @@ public class ProductView extends JPanel {
 
     public void addBackMainListener(ActionListener listener){ BackMainMenu.addActionListener(listener);}
     public void addActiveFilterListener(ActionListener listener){ activeFilter.addActionListener(listener);}
-    public void addCartListener(ActionListener listener){accesCart.addActionListener(listener);}
+    public void addAccesCartListener(ActionListener listener){accesCart.addActionListener(listener);}
     public void addNextPageListener(ActionListener listener)
     {
         NextProductPageButton.addActionListener(listener);

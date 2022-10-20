@@ -1,5 +1,6 @@
 package Shop.views;
 
+import Shop.formatting.CurrencyHelper;
 import Shop.models.Product;
 
 import javax.imageio.ImageIO;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.text.NumberFormat;
 
 public class ProductPanel extends JPanel {
 
@@ -30,12 +32,16 @@ public class ProductPanel extends JPanel {
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
+    private final NumberFormat currencyFormatter;
 
     public ProductPanel(Product product){
+
+        currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
         Border raisedetched;
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         setBorder(raisedetched);
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 

@@ -1,7 +1,6 @@
 package Shop.models;
 import java.sql.*;
 import java.util.ArrayList;
-import Shop.models.Product;
 
 
 public class ListOfProducts {
@@ -51,7 +50,7 @@ public class ListOfProducts {
         Product product5 = new Product("Diamond", 3, "https://static.wikia.nocookie.net/minecraft/images/2/2f/New_DiamondB.png/revision/latest?cb=20190520094830", "food");>>>>>>> 01f6b15604de79b1d342dba6f56ded5f7d6c4fd2
     }
 
-    public void FillUShopAvailableProduct(){
+    public void FillShopAvailableProduct(){
         Product product1 = new Product("Apple", 5, "https://static.wikia.nocookie.net/minecraft/images/e/e5/AppleOld.png/revision/latest?cb=20200805163025", "food");
         AllAvailableProducts.add(product1);
         Product product2 = new Product("Bone", 3, "https://static.wikia.nocookie.net/minecraft/images/2/25/BoneNew.png/revision/latest?cb=20190901164534", "armor");

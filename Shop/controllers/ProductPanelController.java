@@ -1,15 +1,22 @@
 package Shop.controllers;
 
+import Shop.formatting.CurrencyHelper;
 import Shop.views.ProductPanel;
 
 import java.awt.event.ActionEvent;
+import java.text.NumberFormat;
 
 public class ProductPanelController {
 
     private final ProductPanel view;
 
+    private final NumberFormat currencyFormatter;
+
+
     public ProductPanelController(ProductPanel view){
         this.view = view;
+
+        currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
         view.addAddToCartListener(this::OnAddToCartClicked);
         view.addIncreaseQuantityListener(this::OnIncreaseQuantityClicked);
