@@ -2,6 +2,7 @@ package Shop.controllers;
 
 import Shop.formatting.CurrencyHelper;
 import Shop.views.ProductPanel;
+import com.sun.tools.javac.Main;
 
 import java.awt.event.ActionEvent;
 import java.lang.Thread.State;
@@ -30,40 +31,48 @@ public class ProductPanelController {
     }
 
     private void OnAddToCartClicked(ActionEvent event){
-        int sku = Integer.parseInt(view.getProductSKU());
-        String User = "test";
-        try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
-            String query = "SELECT UserName, logged FROM shop.userdb WHERE logged=true";
-            String query2 = "SELECT * FROM shop.product WHERE SKU=?";
-            String query3 = "INSERT INTO cart VALUES (?,?,?,?,?,?,?,?)";
-            Statement statement = connection.createStatement();
-            PreparedStatement statement2 = connection.prepareStatement(query2);
-            PreparedStatement statement3 = connection.prepareStatement(query3);
-            statement2.setInt(1, sku);
-            statement3.setInt(1, sku);
-            ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
-                User = resultSet.getString("UserName");
 
-            }
-            ResultSet resultSet2 = statement2.executeQuery();
-            while(resultSet2.next()){
-                statement3.setString(2, User);
-                statement3.setString(3, resultSet2.getString("prodName"));
-                statement3.setString(4, resultSet2.getString("prodDescription"));
-                statement3.setString(5, resultSet2.getString("prodPath"));
-                statement3.setString(6, resultSet2.getString("Cartegory"));
-                statement3.setDouble(7, resultSet2.getDouble("Price"));
-                statement3.setInt(8, resultSet2.getInt("Quantity"));
-            }
+        if(MainController.logOut() == false){
+            view.displayErrorMessage("You must be connected to add " +
+                    "product to your cart !");
+        }
+        else {
 
-            int rowsAffected = statement3.executeUpdate();
-            if (rowsAffected == 0){
-                System.out.println("Can't add the product");
-            }
+            int sku = Integer.parseInt(view.getProductSKU());
+            String User = "test";
+            try (Connection connection = DriverManager.getConnection(url, username, passwordd)) {
+                String query = "SELECT UserName, logged FROM shop.userdb WHERE logged=true";
+                String query2 = "SELECT * FROM shop.product WHERE SKU=?";
+                String query3 = "INSERT INTO cart VALUES (?,?,?,?,?,?,?,?)";
+                Statement statement = connection.createStatement();
+                PreparedStatement statement2 = connection.prepareStatement(query2);
+                PreparedStatement statement3 = connection.prepareStatement(query3);
+                statement2.setInt(1, sku);
+                statement3.setInt(1, sku);
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    User = resultSet.getString("UserName");
 
-        } catch (SQLException e) {
-            throw new IllegalStateException("ça va être chaud ?", e);
+                }
+                ResultSet resultSet2 = statement2.executeQuery();
+                while (resultSet2.next()) {
+                    statement3.setString(2, User);
+                    statement3.setString(3, resultSet2.getString("prodName"));
+                    statement3.setString(4, resultSet2.getString("prodDescription"));
+                    statement3.setString(5, resultSet2.getString("prodPath"));
+                    statement3.setString(6, resultSet2.getString("Cartegory"));
+                    statement3.setDouble(7, resultSet2.getDouble("Price"));
+                    statement3.setInt(8, resultSet2.getInt("Quantity"));
+                }
+
+                int rowsAffected = statement3.executeUpdate();
+                if (rowsAffected == 0) {
+                    System.out.println("Can't add the product");
+                }
+
+            } catch (SQLException e) {
+                throw new IllegalStateException("ça va être chaud ?", e);
+            }
         }
 
 

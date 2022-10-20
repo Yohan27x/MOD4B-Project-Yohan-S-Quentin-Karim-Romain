@@ -23,8 +23,6 @@ public class MainController {
 
         view.initialize(account);
 
-        //window.getRootPane().setDefaultButton(view.getDefaultButton());
-        //view.focusUsername();
 
         view.addBrowseListener(this::onBrowseClicked);
         view.addStoreBalanceListener(this::onStoreBalanceClicked);
@@ -39,23 +37,35 @@ public class MainController {
     }
 
     private void onStoreBalanceClicked(ActionEvent event){
-        NavigationService.displayStoreBalancePage(window);
+        
+        if (MainController.logOut() == false) {
+            view.displayErrorMessage("You need to be connected to acces your balance !");
+        }else{
+            NavigationService.displayStoreBalancePage(window);
+        }
+
     }
 
 
     private void onViewCartClicked(ActionEvent event){
+        if (MainController.logOut() == false) {
+            view.displayErrorMessage("You need to be connected to see acces your cart !");
+        }else{
+            NavigationService.displayCartPage(window);
+        }
         // check si connecté
-        // view.displayErrorMessage("")
+        // view.displayErrorMessage("");
         // else
-        NavigationService.displayCartPage(window);
+
 
     }
 
-    private void onPastOrderClicked(ActionEvent event){
-        // check si connecté
-        // view.displayErrorMessage("")
-        // else
-        NavigationService.displayPastOrdersPage(window);
+    private void onPastOrderClicked(ActionEvent event) {
+        if (MainController.logOut() == false) {
+            view.displayErrorMessage("You need to be connected to see past orders !");
+        }else{
+            NavigationService.displayPastOrdersPage(window);
+        }
     }
 
     private void onLogOutClicked(ActionEvent event){

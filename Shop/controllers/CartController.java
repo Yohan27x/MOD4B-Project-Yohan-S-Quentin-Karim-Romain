@@ -15,7 +15,6 @@ public class CartController {
     private final ListOfProducts listOfProducts;
     private final CartView view;
     private final Window window;
-
     private final NumberFormat currencyFormatter;
 
 
@@ -44,9 +43,10 @@ public class CartController {
     private void OnClearCartClicked(ActionEvent event)
     {
 
-        // clear le cart dans la db avec le user true et dans le view view.ClearCart();
-        System.out.println("cart clear");
+
         view.ClearCart();
+
+        // todo remove product cart in the dataBase
 
     }
 
@@ -60,9 +60,7 @@ public class CartController {
         // supprimer les produits du panier dnas la db et dans le view //view.ClearCart();
 
 
-        //view.createAllProductInCartPanels(listOfProducts);
-
-        view.displayErrorMessage(true, "ok checkout!"); // bleue ok
+        //view.displayErrorMessage(true, "ok checkout!"); // bleue ok
         //view.displayErrorMessage(false, "probleme !"); // rouge erreur
     }
 
