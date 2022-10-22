@@ -40,6 +40,8 @@ public class CartView extends JPanel {
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
+        
+
         subTotalLabel = new JLabel("");
         taxTotalLabel = new JLabel("");
         shippingFeeLabel = new JLabel("");

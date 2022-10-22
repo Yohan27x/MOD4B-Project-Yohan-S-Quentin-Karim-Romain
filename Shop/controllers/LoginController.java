@@ -7,11 +7,12 @@ import Shop.views.LoginView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
-
+import Shop.repository.connectDb;
 public class LoginController {
     private final LoginView view;
     
     private final Window window;
+    private connectDb db;
     
     public LoginController(LoginView view, Window window)
     {
@@ -28,6 +29,11 @@ public class LoginController {
 
     private void onAccesMainlicked(ActionEvent event)
     {
+        if (db.isLogged()){
+            System.out.println("Someone is logged");
+        }else{
+            System.out.println("no user logged");
+        }
         NavigationService.displayMainPage(window);
 
     }
@@ -41,7 +47,6 @@ public class LoginController {
             NavigationService.displayMainPage(window);
         }
         else {
-            System.out.println("bad userName or password");
             view.setErreurMessage("bad userName or password");
         }
 

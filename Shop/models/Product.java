@@ -29,14 +29,13 @@ public class Product {
         this.imagePath = path;
 
     }
-    public Product(int SKU, String name, double price, String path, String category, int quantity, String description, int quantityChoosen) {
+    public Product( String name, double price, String path, String category, int quantity, String description, int quantityChoosen) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.imagePath = path;
         this.category = category;
         this.description = description;
-        this.SKU = SKU;
         this.quantityChoosen = quantityChoosen;
 
     }

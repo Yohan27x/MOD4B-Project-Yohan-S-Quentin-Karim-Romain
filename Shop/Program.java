@@ -31,7 +31,7 @@ public class Program {
     {
         useSystemLookAndFeel();
 
-        Window window = new Window("LoginPage", true);
+        Window window = new Window("MineCart", true);
         NavigationService.displayLogInPage(window);
         //NavigationService.displayMainPage(window);
         window.setVisible(true);

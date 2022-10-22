@@ -12,17 +12,14 @@ import java.text.NumberFormat;
 public class PastOrderPanel extends JPanel {
 
     private final JLabel totalPrice;
-    private static int numOfOrders = 0 ;
-    private final JLabel numOfOrder;
     private final NumberFormat currencyFormatter;
 
     PastOrderPanel(double price){
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
-        numOfOrders += 1;
+
         totalPrice = new JLabel(price + "£");
-        numOfOrder = new JLabel(numOfOrders + "");
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -30,22 +27,12 @@ public class PastOrderPanel extends JPanel {
         raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         setBorder(raisedetched);
 
-        add(createNumOrderpanel());
-        add(new JLabel("//"));
+  
         add(createOrderPanel());
 
     }
 
-    public JPanel createNumOrderpanel(){
-        JPanel panel = new JPanel();
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-        panel.add(createValueLabel("Order number : "));
-        panel.add(numOfOrder);
-
-
-        return panel;
-    }
+   
     public JPanel createOrderPanel(){
         JPanel panel = new JPanel();
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

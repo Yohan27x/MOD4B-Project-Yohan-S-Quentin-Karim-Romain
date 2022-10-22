@@ -2,6 +2,7 @@ package Shop.controllers;
 
 import Shop.NavigationService;
 import Shop.models.Account;
+import Shop.repository.connectDb;
 import Shop.utility.Window;
 import Shop.views.MainView;
 
@@ -15,8 +16,13 @@ public class MainController {
     private final MainView view;
     private final Window window;
 
+    private final connectDb db;
+
 
     public MainController(Account account, MainView view, Window window){
+
+        this.db = new connectDb();
+
         this.account = account;
         this.view = view;
         this.window = window;
@@ -37,35 +43,38 @@ public class MainController {
     }
 
     private void onStoreBalanceClicked(ActionEvent event){
-        
-        if (MainController.logOut() == false) {
-            view.displayErrorMessage("You need to be connected to acces your balance !");
-        }else{
+        if(db.isLogged()){
             NavigationService.displayStoreBalancePage(window);
         }
-
+        else{
+            view.displayErrorMessage(" you have to be log to do that");
+        }
+        
+       
     }
 
 
     private void onViewCartClicked(ActionEvent event){
-        if (MainController.logOut() == false) {
-            view.displayErrorMessage("You need to be connected to see acces your cart !");
-        }else{
+      
+        if(db.isLogged()){
             NavigationService.displayCartPage(window);
         }
-        // check si connecté
-        // view.displayErrorMessage("");
-        // else
+        else{
+            view.displayErrorMessage(" you have to be log to do that");
+        }
 
 
     }
 
     private void onPastOrderClicked(ActionEvent event) {
-        if (MainController.logOut() == false) {
-            view.displayErrorMessage("You need to be connected to see past orders !");
-        }else{
-            NavigationService.displayPastOrdersPage(window);
+        if(db.isLogged()){
+            NavigationService.displayPastOrdersPage(window);        }
+        else{
+            view.displayErrorMessage(" you have to be log to do that");
         }
+        
+        
+        
     }
 
     private void onLogOutClicked(ActionEvent event){

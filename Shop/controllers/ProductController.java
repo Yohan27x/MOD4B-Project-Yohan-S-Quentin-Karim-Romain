@@ -9,6 +9,7 @@ import Shop.utility.Window;
 import Shop.NavigationService;
 import Shop.formatting.CurrencyHelper;
 import Shop.models.ListOfProducts;
+import Shop.repository.connectDb;
 import Shop.views.ProductView;
 
 
@@ -17,9 +18,15 @@ public class ProductController {
     private final ListOfProducts listOfProducts;
     private final ProductView view;
     private final Window window;
+
+    private final connectDb db;
+
     private final NumberFormat currencyFormatter;
     
     public ProductController(ProductView view, Window window){
+
+        this.db = new connectDb();
+
         this.view = view;
         this.window = window;
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
@@ -40,12 +47,19 @@ public class ProductController {
 
     private void OnBackMainClicked(ActionEvent event){NavigationService.displayMainPage(window);}
 
-    private void OnAccesCartClicked(ActionEvent event){NavigationService.displayCartPage(window);
+    private void OnAccesCartClicked(ActionEvent event){
+        if(db.isLogged()){
+            NavigationService.displayCartPage(window);
+        }
+        else{
+            view.displayErrorMessage("you have to be log");
+        }
+        
     }
 
     private void OnActiveFilterClicked(ActionEvent event){
 
-        System.out.println("active filter");
+        System.out.println("active filter !");
         ///view.setFirstPageNumber("1");
 
         // récupérer les filtres choisis dans le view
@@ -80,7 +94,7 @@ public class ProductController {
             int newEndRangeProduct = view.getEndRangeProduct() + view.getProductPerPage();
             view.setEndRangeProduct(newEndRangeProduct);
 
-            System.out.println(view.getFirstPageNumber());
+            //System.out.println(view.getFirstPageNumber());
 
             view.refreshProductsContainer(listOfProducts);
 

@@ -1,6 +1,7 @@
 package Shop.controllers;
 
 import Shop.formatting.CurrencyHelper;
+import Shop.repository.connectDb;
 import Shop.views.ProductPanel;
 import com.sun.tools.javac.Main;
 
@@ -15,13 +16,12 @@ public class ProductPanelController {
 
     private final NumberFormat currencyFormatter;
 
-    final static String url = "jdbc:mysql://127.0.0.1:3306/shop";
-    final static String username = "java";
-    final static String passwordd = "password";
+    private final connectDb db;
 
 
     public ProductPanelController(ProductPanel view){
         this.view = view;
+        this.db = new connectDb();
 
         currencyFormatter = CurrencyHelper.getCurrencyFormatter();
 
@@ -31,57 +31,16 @@ public class ProductPanelController {
     }
 
     private void OnAddToCartClicked(ActionEvent event){
-
-        if(MainController.logOut() == false){
-            view.displayErrorMessage("You must be connected to add " +
-                    "product to your cart !");
+        if(db.isLogged()){
+            db.addToCart(Integer.parseInt(view.getProductSKU()),Integer.parseInt(view.getProductQuantityChoosen()) );
         }
-        else {
-        int sku = Integer.parseInt(view.getProductSKU());
-        String User = "test";
-        int SKU = 0;
-        
-        int quant = Integer.parseInt(view.getProductQuantityChoosen());
-        System.out.println("====== : " + sku);
-        try (Connection connection = DriverManager.getConnection(url, username, passwordd)){
-            String query = "SELECT UserName, logged FROM shop.userdb WHERE logged=true";
-            String query2 = "SELECT * FROM shop.product WHERE SKU=?";
-            String query3 = "INSERT INTO cart VALUES (?,?,?,?,?,?,?,?,?)";
-            String queryT = "SELECT * FROM shop.cart";
-            Statement statement = connection.createStatement();
-            Statement statementT = connection.createStatement();
-            PreparedStatement statement2 = connection.prepareStatement(query2);
-            PreparedStatement statement3 = connection.prepareStatement(query3);
-            statement2.setInt(1, sku);
-            // incrémenter le SKU
-            ResultSet increm = statementT.executeQuery(queryT);
-            while (increm.next()) {
-                SKU++;
-                System.out.println(SKU);
-            }
-            statement3.setInt(1, SKU+1);
-            ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
-                User = resultSet.getString("UserName");
-                System.out.println(User);
-
-            }
-            System.out.println("?????????????????????????????????????????");
-            ResultSet resultSet2 = statement2.executeQuery();
-            System.out.println("??????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!???????????????????????");
-            while(resultSet2.next()){
-                System.out.println(User);
-                statement3.setString(2, User);
-                statement3.setString(3, resultSet2.getString("prodName"));
-                statement3.setString(4, resultSet2.getString("prodDescription"));
-                statement3.setString(5, resultSet2.getString("prodPath"));
-                statement3.setString(6, resultSet2.getString("Cartegory"));
-                statement3.setDouble(7, resultSet2.getDouble("Price"));
-                statement3.setInt(8,  resultSet2.getInt("Quantity"));
-                statement3.setInt(9, quant);
-            }
+        else{
+            view.displayErrorMessage(" you have to be log");
         }
+
+       
     }
+    
 
 
     private void OnIncreaseQuantityClicked(ActionEvent event) {

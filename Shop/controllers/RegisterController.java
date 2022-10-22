@@ -28,7 +28,7 @@ public class RegisterController {
             String adress = view.getAdress();
             String mail = view.getMail();
             double balance = Double.parseDouble(view.getBalance());
-            System.out.println("User name :" + userName + "\n PASS : " + pass);
+            //System.out.println("User name :" + userName + "\n PASS : " + pass);
             if (pass.equals(pass2) ){
                 testUser(userName, pass, adress, mail, balance, window);
             }else{
